@@ -25,6 +25,7 @@
 		7364E4592443AC4100A7376A /* NotificationsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7364E4582443AC4100A7376A /* NotificationsVC.swift */; };
 		7364E45B2443AC4F00A7376A /* UserProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7364E45A2443AC4F00A7376A /* UserProfileVC.swift */; };
 		7364E4642443CF7100A7376A /* UserProfileHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7364E4632443CF7100A7376A /* UserProfileHeaderCell.swift */; };
+		7364E4662443EB3F00A7376A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7364E4652443EB3F00A7376A /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		7364E4582443AC4100A7376A /* NotificationsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsVC.swift; sourceTree = "<group>"; };
 		7364E45A2443AC4F00A7376A /* UserProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileVC.swift; sourceTree = "<group>"; };
 		7364E4632443CF7100A7376A /* UserProfileHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileHeaderCell.swift; sourceTree = "<group>"; };
+		7364E4652443EB3F00A7376A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		99BC0CE9D89A5761B6DF0653 /* Pods_Spotsound.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Spotsound.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A90EF7ADEB13601E6FCCCDF /* Pods-Spotsound.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spotsound.debug.xcconfig"; path = "Target Support Files/Pods-Spotsound/Pods-Spotsound.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -121,6 +123,7 @@
 		7364E444244290AE00A7376A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7364E4652443EB3F00A7376A /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -128,6 +131,7 @@
 		7364E445244290B700A7376A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7364E4632443CF7100A7376A /* UserProfileHeaderCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -143,7 +147,6 @@
 				7364E45F2443CEF600A7376A /* UserProfile */,
 				7364E45E2443CEE500A7376A /* Notifications */,
 				7364E45024439B4300A7376A /* MainTabVC.swift */,
-				7364E4632443CF7100A7376A /* UserProfileHeaderCell.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -334,6 +337,7 @@
 				7364E4352442908A00A7376A /* ViewController.swift in Sources */,
 				7364E4312442908A00A7376A /* AppDelegate.swift in Sources */,
 				7364E4552443ABBB00A7376A /* SearchVC.swift in Sources */,
+				7364E4662443EB3F00A7376A /* User.swift in Sources */,
 				7364E4592443AC4100A7376A /* NotificationsVC.swift in Sources */,
 				7364E4482442911B00A7376A /* LoginVC.swift in Sources */,
 				7364E45324439ED200A7376A /* FeedVC.swift in Sources */,

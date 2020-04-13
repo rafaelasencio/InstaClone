@@ -10,6 +10,13 @@ import UIKit
 
 class UserProfileHeaderCell: UICollectionViewCell {
     
+    var user: User? {
+        didSet {
+            let fullname = user?.name
+            fullnameLabel.text = fullname
+        }
+    }
+    
     let profileImageView: UIImageView = {
        let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
@@ -20,7 +27,6 @@ class UserProfileHeaderCell: UICollectionViewCell {
     
     let fullnameLabel: UILabel = {
         let lbl = UILabel()
-        lbl.text = "Fullname"
         lbl.font = UIFont.boldSystemFont(ofSize: 12)
         return lbl
     }()
@@ -66,7 +72,7 @@ class UserProfileHeaderCell: UICollectionViewCell {
     
     let editProfileButton: UIButton = {
         let btn = UIButton()
-        btn.setTitle("Edit profile", for: .normal)
+        btn.setTitle("Edit Profile", for: .normal)
         btn.setTitleColor(.black, for: .normal)
         btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         btn.layer.cornerRadius = 5
