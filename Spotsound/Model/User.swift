@@ -7,19 +7,14 @@
 //
 
 import Foundation
+import Firebase
 
 class User {
     var username: String!
     var name: String!
     var profileImageUrl: String!
     var uid: String!
-    
-    init(username: String, name: String, profileImageUrl: String, uid: String) {
-        self.username = username
-        self.name = name
-        self.profileImageUrl = profileImageUrl
-        self.uid = uid
-    }
+    var isFollowed = false
     
     init(uid: String, dict: Dictionary<String, AnyObject>) {
         self.uid = uid
@@ -33,5 +28,45 @@ class User {
         if let profileImageUrl = dict["profileImageUrl"] as? String {
             self.profileImageUrl = profileImageUrl
         }
+    }
+    
+    func follow(){
+        
+        guard let currentUserUid = Auth.auth().currentUser?.uid else {return}
+        guard let uid = uid else {return}
+        self.isFollowed = true
+        
+        USER_FOLLOWING_REF.child(currentUserUid).updateChildValues([uid : 1])
+        USER_FOLLOWER_REF.child(uid).updateChildValues([currentUserUid : 1])
+    }
+    
+    func unfollow(){
+        
+        guard let currentUserUid = Auth.auth().currentUser?.uid else {return}
+        guard let uid = uid else {return}
+        self.isFollowed = false
+        
+        USER_FOLLOWING_REF.child(currentUserUid).child(uid).removeValue()
+        USER_FOLLOWER_REF.child(uid).child(currentUserUid).removeValue()
+    }
+    
+    func checkIfUserIsFollowed(completion: @escaping(Bool) ->() ){
+        guard let currentUserUid = Auth.auth().currentUser?.uid else {return}
+        
+        Database.database().reference().child(currentUserUid).observeSingleEvent(of: .value) { (snapshot) in
+            
+            if snapshot.hasChild(self.uid) {
+                
+                self.isFollowed = true
+                print("user is followed")
+                completion(true)
+            } else {
+                self.isFollowed = false
+                print("user not followed")
+                completion(false)
+            }
+        }
+        
+        
     }
 }

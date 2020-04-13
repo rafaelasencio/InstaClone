@@ -9,11 +9,13 @@
 import UIKit
 import Firebase
 
+
 class UserProfileHeaderCell: UICollectionViewCell {
+    
+    var deletage: UserProfileHeaderCellDelegate?
     
     var user: User? {
         didSet {
-            
             configureEditProfileFollowButton()
             
             let fullname = user?.name
@@ -85,6 +87,7 @@ class UserProfileHeaderCell: UICollectionViewCell {
         btn.layer.cornerRadius = 5
         btn.layer.borderColor = UIColor.black.cgColor
         btn.layer.borderWidth = 1
+        btn.addTarget(self, action: #selector(editProfileButtonTapped), for: .touchUpInside)
         return btn
     }()
     
@@ -140,11 +143,26 @@ class UserProfileHeaderCell: UICollectionViewCell {
         if currentUserUid == user.uid {
             editProfileFollowButton.setTitle("Edit Profile", for: .normal)
         } else {
+            user.checkIfUserIsFollowed()
+            
             editProfileFollowButton.setTitle("Follow", for: .normal)
             editProfileFollowButton.setTitleColor(.white, for: .normal)
             editProfileFollowButton.backgroundColor = UIColor(red: 17/255, green: 154/255, blue: 237/255, alpha: 1)
         }
     }
+    
+    @objc func followersButtonTapped(){
+        deletage?.followersButtonTapped(for: self)
+    }
+    
+    @objc func followingButtonTapped(){
+        deletage?.followingButtonTapped(for: self)
+    }
+    
+    @objc func editProfileButtonTapped(){
+        deletage?.editProfileButtonTapped(for: self)
+    }
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)

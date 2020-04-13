@@ -24,7 +24,7 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView!.register(UserProfileHeaderCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: userProfileHeaderCell)
         
-        //fetch only userprofile.
+        //fetch is user is not current user.
         if userToLoadFromSearchVC == nil {
             fetchCurrentUserData()
         }
@@ -55,6 +55,8 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
         
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: userProfileHeaderCell, for: indexPath) as! UserProfileHeaderCell
         
+        header.deletage = self
+        
         if let user = self.currentUser {
             header.user = user
         } else if let userToLoadFromSearchVC = self.userToLoadFromSearchVC {
@@ -84,4 +86,44 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
         }
     }
 
+}
+
+extension UserProfileVC: UserProfileHeaderCellDelegate {
+    func followersButtonTapped(for header: UserProfileHeaderCell) {
+//        let followVC = FollowLikeVC()
+        print("go to FollowLikeVC")
+    }
+    
+    func followingButtonTapped(for header: UserProfileHeaderCell) {
+        print("go to FollowLikeVC")
+    }
+    
+    func editProfileButtonTapped(for header: UserProfileHeaderCell) {
+        guard let user = header.user else {return}
+        
+        if header.editProfileFollowButton.titleLabel?.text == "Edit Profile" {
+            //Go to EditProfileVC
+            print("go to EditProfileVC")
+            
+        } else {
+            
+            if header.editProfileFollowButton.titleLabel?.text == "Follow" {
+                header.editProfileFollowButton.setTitle("Following", for: .normal)
+                
+                user.follow()
+            } else {
+                header.editProfileFollowButton.setTitle("Follow", for: .normal)
+                
+                user.unfollow()
+            }
+        }
+    }
+    
+    func setUserStats(for header: UserProfileHeaderCell) {
+        
+    }
+    
+    
+    
+    
 }

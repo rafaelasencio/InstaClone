@@ -50,7 +50,7 @@ class SearchVC: UITableViewController {
     }
     
     func configureNavController(){
-        self.navigationItem.title = "Algo"
+        self.navigationItem.title = "SearchVC"
     }
     
     func fetchUser(){
