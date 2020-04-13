@@ -53,8 +53,8 @@ class User {
     func checkIfUserIsFollowed(completion: @escaping(Bool) ->() ){
         guard let currentUserUid = Auth.auth().currentUser?.uid else {return}
         
-        Database.database().reference().child(currentUserUid).observeSingleEvent(of: .value) { (snapshot) in
-            
+        USER_FOLLOWING_REF.child(currentUserUid).observeSingleEvent(of: .value) { (snapshot) in
+            // check if current user is following this user
             if snapshot.hasChild(self.uid) {
                 
                 self.isFollowed = true

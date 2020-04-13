@@ -12,7 +12,7 @@ import Firebase
 
 class UserProfileHeaderCell: UICollectionViewCell {
     
-    var deletage: UserProfileHeaderCellDelegate?
+    var delegate: UserProfileHeaderCellDelegate?
     
     var user: User? {
         didSet {
@@ -79,17 +79,18 @@ class UserProfileHeaderCell: UICollectionViewCell {
         return lbl
     }()
     
-    let editProfileFollowButton: UIButton = {
-        let btn = UIButton()
-        btn.setTitle("Loading", for: .normal)
-        btn.setTitleColor(.black, for: .normal)
-        btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-        btn.layer.cornerRadius = 5
-        btn.layer.borderColor = UIColor.black.cgColor
-        btn.layer.borderWidth = 1
-        btn.addTarget(self, action: #selector(editProfileButtonTapped), for: .touchUpInside)
-        return btn
+    lazy var editProfileFollowButton: UIButton = {
+       let button = UIButton(type: .system)
+        button.setTitle("Loading", for: .normal)
+        button.layer.cornerRadius = 3
+        button.layer.borderColor = UIColor.lightGray.cgColor
+        button.layer.borderWidth = 0.5
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.setTitleColor(.black, for: .normal)
+        button.addTarget(self, action: #selector(handleEditProfileFollow), for: .touchUpInside)
+        return button
     }()
+
     
     let grindButton: UIButton = {
         let btn = UIButton(type: .system)
@@ -143,24 +144,30 @@ class UserProfileHeaderCell: UICollectionViewCell {
         if currentUserUid == user.uid {
             editProfileFollowButton.setTitle("Edit Profile", for: .normal)
         } else {
-            user.checkIfUserIsFollowed()
-            
-            editProfileFollowButton.setTitle("Follow", for: .normal)
             editProfileFollowButton.setTitleColor(.white, for: .normal)
             editProfileFollowButton.backgroundColor = UIColor(red: 17/255, green: 154/255, blue: 237/255, alpha: 1)
+            
+            user.checkIfUserIsFollowed { (followed) in
+                if followed {
+                    self.editProfileFollowButton.setTitle("Following", for: .normal)
+                } else {
+                    self.editProfileFollowButton.setTitle("Follow", for: .normal)
+                }
+            }
         }
     }
     
-    @objc func followersButtonTapped(){
-        deletage?.followersButtonTapped(for: self)
+    @objc func handleFollowersTapped() {
+        delegate?.handleFollowersButtonTapped(for: self)
     }
     
-    @objc func followingButtonTapped(){
-        deletage?.followingButtonTapped(for: self)
+    @objc func handleFollowingTapped() {
+        delegate?.handleFollowingButtonTapped(for: self)
     }
-    
-    @objc func editProfileButtonTapped(){
-        deletage?.editProfileButtonTapped(for: self)
+
+    @objc func handleEditProfileFollow() {
+        print("tapped")
+        delegate?.handleEditProfileButtonTapped(for: self)
     }
     
     
@@ -176,7 +183,7 @@ class UserProfileHeaderCell: UICollectionViewCell {
         
         configureUserStats()
         
-        self.addSubview(editProfileFollowButton)
+        addSubview(editProfileFollowButton)
         editProfileFollowButton.anchor(top: postLabel.bottomAnchor, left: postLabel.leftAnchor, bottom: nil, right: self.rightAnchor, paddingTop: 4, paddingLeft: 8, paddingBottom: 0, paddingRight: 12, width: 0, height: 30)
         
         configureBottomToolBar()

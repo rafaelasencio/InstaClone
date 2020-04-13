@@ -9,8 +9,8 @@
 
 
 protocol UserProfileHeaderCellDelegate {
-    func followersButtonTapped(for header: UserProfileHeaderCell)
-    func followingButtonTapped(for header: UserProfileHeaderCell)
-    func editProfileButtonTapped(for header: UserProfileHeaderCell)
-    func setUserStats(for header: UserProfileHeaderCell)
+    func handleFollowersButtonTapped(for header: UserProfileHeaderCell)
+    func handleFollowingButtonTapped(for header: UserProfileHeaderCell)
+    func handleEditProfileButtonTapped(for header: UserProfileHeaderCell)
+    func handleSetUserStats(for header: UserProfileHeaderCell)
 }

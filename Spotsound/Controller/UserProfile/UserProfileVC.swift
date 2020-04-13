@@ -55,7 +55,7 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
         
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: userProfileHeaderCell, for: indexPath) as! UserProfileHeaderCell
         
-        header.deletage = self
+        header.delegate = self
         
         if let user = self.currentUser {
             header.user = user
@@ -89,16 +89,16 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
 }
 
 extension UserProfileVC: UserProfileHeaderCellDelegate {
-    func followersButtonTapped(for header: UserProfileHeaderCell) {
+    func handleFollowersButtonTapped(for header: UserProfileHeaderCell) {
 //        let followVC = FollowLikeVC()
         print("go to FollowLikeVC")
     }
     
-    func followingButtonTapped(for header: UserProfileHeaderCell) {
+    func handleFollowingButtonTapped(for header: UserProfileHeaderCell) {
         print("go to FollowLikeVC")
     }
     
-    func editProfileButtonTapped(for header: UserProfileHeaderCell) {
+    func handleEditProfileButtonTapped(for header: UserProfileHeaderCell) {
         guard let user = header.user else {return}
         
         if header.editProfileFollowButton.titleLabel?.text == "Edit Profile" {
@@ -119,7 +119,7 @@ extension UserProfileVC: UserProfileHeaderCellDelegate {
         }
     }
     
-    func setUserStats(for header: UserProfileHeaderCell) {
+    func handleSetUserStats(for header: UserProfileHeaderCell) {
         
     }
     
