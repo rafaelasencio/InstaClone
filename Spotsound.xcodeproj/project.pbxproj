@@ -26,6 +26,7 @@
 		7364E45B2443AC4F00A7376A /* UserProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7364E45A2443AC4F00A7376A /* UserProfileVC.swift */; };
 		7364E4642443CF7100A7376A /* UserProfileHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7364E4632443CF7100A7376A /* UserProfileHeaderCell.swift */; };
 		7364E4662443EB3F00A7376A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7364E4652443EB3F00A7376A /* User.swift */; };
+		7364E4682443FCD500A7376A /* SearchUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7364E4672443FCD500A7376A /* SearchUserCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		7364E45A2443AC4F00A7376A /* UserProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileVC.swift; sourceTree = "<group>"; };
 		7364E4632443CF7100A7376A /* UserProfileHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileHeaderCell.swift; sourceTree = "<group>"; };
 		7364E4652443EB3F00A7376A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		7364E4672443FCD500A7376A /* SearchUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserCell.swift; sourceTree = "<group>"; };
 		99BC0CE9D89A5761B6DF0653 /* Pods_Spotsound.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Spotsound.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A90EF7ADEB13601E6FCCCDF /* Pods-Spotsound.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spotsound.debug.xcconfig"; path = "Target Support Files/Pods-Spotsound/Pods-Spotsound.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -132,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				7364E4632443CF7100A7376A /* UserProfileHeaderCell.swift */,
+				7364E4672443FCD500A7376A /* SearchUserCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 				7364E4572443AC0E00A7376A /* UploadPostVC.swift in Sources */,
 				7364E4352442908A00A7376A /* ViewController.swift in Sources */,
 				7364E4312442908A00A7376A /* AppDelegate.swift in Sources */,
+				7364E4682443FCD500A7376A /* SearchUserCell.swift in Sources */,
 				7364E4552443ABBB00A7376A /* SearchVC.swift in Sources */,
 				7364E4662443EB3F00A7376A /* User.swift in Sources */,
 				7364E4592443AC4100A7376A /* NotificationsVC.swift in Sources */,
