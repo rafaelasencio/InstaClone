@@ -10,6 +10,17 @@ import UIKit
 
 class SearchUserCell: UITableViewCell {
 
+    var user: User? {
+        didSet {
+            guard let profileImageUrl = user?.profileImageUrl else {return}
+            guard let fullname = user?.name else {return}
+            guard let username = user?.username else {return}
+            
+            profileImageView.loadImage(with: profileImageUrl)
+            self.textLabel?.text = username
+            self.detailTextLabel?.text = fullname
+        }
+    }
     let profileImageView: UIImageView = {
        let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
@@ -34,7 +45,6 @@ class SearchUserCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        
         textLabel?.frame = CGRect(x: 68, y: textLabel!.frame.origin.y - 2, width: textLabel!.frame.width, height: textLabel!.frame.height)
         textLabel?.font = UIFont.boldSystemFont(ofSize: 12)
         
@@ -43,6 +53,7 @@ class SearchUserCell: UITableViewCell {
         detailTextLabel?.textColor = .lightGray
         
     }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
