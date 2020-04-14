@@ -58,11 +58,10 @@ class SearchVC: UITableViewController {
             
             let uid = snapshot.key
             
-            guard let dict = snapshot.value as? Dictionary <String, AnyObject> else {return}
-            
-            let user = User(uid: uid, dict: dict)
-            self.users.append(user)
-            self.tableView.reloadData()
+            Database.fetchUser(with: uid) { (user) in
+                self.users.append(user)
+                self.tableView.reloadData()
+            }
         }
     }
 }

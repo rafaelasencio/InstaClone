@@ -40,16 +40,28 @@ class FollowVC: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return users.count
     }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! FollowCell
         cell.user = users[indexPath.row]
+        cell.delegate = self
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let user = users[indexPath.row]
+        let userProfileVC = UserProfileVC(collectionViewLayout: UICollectionViewFlowLayout())
+        userProfileVC.user = user
+        navigationController?.pushViewController(userProfileVC, animated: true)
     }
     
     func fetchUsers(){
@@ -63,18 +75,49 @@ class FollowVC: UITableViewController {
         } else {
             ref = USER_FOLLOWING_REF
         }
-        
-        ref.child(currentUserID).observe(.childAdded) { (snapshot) in
+        //.childAdded is going to observe every time value is added
+        ref.child(currentUserID).observeSingleEvent(of: .value) { (snapshot) in
             
-            let userId = snapshot.key
+            guard let allObjects = snapshot.children.allObjects as? [DataSnapshot] else {return}
             
-            USER_REF.child(userId).observeSingleEvent(of: .value) { (snapshot) in
-                guard let dict = snapshot.value as? Dictionary<String, AnyObject> else {return}
-                let user = User(uid: userId, dict: dict)
-                self.users.append(user)
-                self.tableView.reloadData()
+            allObjects.forEach { (snapshot) in
+                
+                let userId = snapshot.key
+                
+                Database.fetchUser(with: userId) { (user) in
+                    self.users.append(user)
+                    self.tableView.reloadData()
+                }
             }
         }
         
     }
+}
+
+extension FollowVC: FollowCellDelegate {
+    
+    func handleFollowTapped(for cell: FollowCell) {
+        guard let user = cell.user else {return}
+        
+        if user.isFollowed {
+            print("unfollow")
+            user.unfollow()
+            
+            cell.followButton.setTitle("Follow", for: .normal)
+            cell.followButton.setTitleColor(.white, for: .normal)
+            cell.followButton.layer.borderWidth = 0
+            cell.followButton.backgroundColor = UIColor(red: 17/255, green: 154/255, blue: 237/255, alpha: 1)
+        } else {
+            print("following")
+            user.follow()
+            
+            cell.followButton.setTitle("Following", for: .normal)
+            cell.followButton.setTitleColor(.black, for: .normal)
+            cell.followButton.layer.borderColor = UIColor.lightGray.cgColor
+            cell.followButton.layer.borderWidth = 0.5
+            cell.followButton.backgroundColor = .white
+        }
+    }
+    
+    
 }

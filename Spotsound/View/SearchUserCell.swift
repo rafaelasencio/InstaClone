@@ -40,6 +40,8 @@ class SearchUserCell: UITableViewCell {
 
         self.textLabel?.text = "Header"
         self.detailTextLabel?.text = "Detail"
+        
+        self.selectionStyle = .none
     }
     
     override func layoutSubviews() {

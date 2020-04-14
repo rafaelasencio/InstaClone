@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 extension UIView {
     
@@ -68,5 +69,19 @@ extension UIImageView {
             return
             
         }.resume()
+    }
+}
+
+extension Database {
+    
+    
+    static func fetchUser(with uid: String, completion:@escaping(User)->()) {
+        
+        USER_REF.child(uid).observeSingleEvent(of: .value) { (snapshot) in
+            
+            guard let dict = snapshot.value as? Dictionary<String, AnyObject> else {return}
+            let user = User(uid: uid, dict: dict)
+            completion(user)
+        }
     }
 }

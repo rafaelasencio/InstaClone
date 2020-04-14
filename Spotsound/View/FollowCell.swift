@@ -7,23 +7,46 @@
 //
 
 import UIKit
+import Firebase
 
 class FollowCell: UITableViewCell {
 
     
     //MARK: - Properties
+    var delegate: FollowCellDelegate!
     
     var user: User? {
-           didSet {
-               guard let profileImageUrl = user?.profileImageUrl else {return}
-               guard let fullname = user?.name else {return}
-               guard let username = user?.username else {return}
-               
-               profileImageView.loadImage(with: profileImageUrl)
-               self.textLabel?.text = username
-               self.detailTextLabel?.text = fullname
-           }
-       }
+        didSet {
+            guard let profileImageUrl = user?.profileImageUrl else {return}
+            guard let fullname = user?.name else {return}
+            guard let username = user?.username else {return}
+            
+            profileImageView.loadImage(with: profileImageUrl)
+            self.textLabel?.text = username
+            self.detailTextLabel?.text = fullname
+            
+            if self.user?.uid == Auth.auth().currentUser?.uid {
+                self.followButton.isHidden = true
+            }
+            
+            user?.checkIfUserIsFollowed(completion: { (followed) in
+                if followed {
+                    //confg follow button for followed user
+                    self.followButton.setTitle("Following", for: .normal)
+                    self.followButton.setTitleColor(.black, for: .normal)
+                    self.followButton.layer.borderColor = UIColor.lightGray.cgColor
+                    self.followButton.layer.borderWidth = 0.5
+                    self.followButton.backgroundColor = .white
+                } else {
+                    //confg follow button for non followed user
+                    self.followButton.setTitle("Follow", for: .normal)
+                    self.followButton.setTitleColor(.white, for: .normal)
+                    self.followButton.layer.borderWidth = 0
+                    self.followButton.backgroundColor = UIColor(red: 17/255, green: 154/255, blue: 237/255, alpha: 1)
+                }
+            })
+        }
+    }
     
     let profileImageView: UIImageView = {
        let iv = UIImageView()
@@ -46,7 +69,7 @@ class FollowCell: UITableViewCell {
     //MARK: - Handlers
     
     @objc func handleFollowTapped(){
-        print("handle follow")
+        delegate.handleFollowTapped(for: self)
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -56,12 +79,14 @@ class FollowCell: UITableViewCell {
         profileImageView.anchor(top: nil, left: self.leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 8, paddingBottom: 0, paddingRight: 0, width: 48, height: 48)
         profileImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         profileImageView.layer.cornerRadius = 48 / 2
-        textLabel?.text = "Username"
-        detailTextLabel?.text = "fullname"
         
         addSubview(followButton)
-        followButton.anchor(top: nil, left: nil, bottom: nil, right: self.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 12, width: 98, height: 0)
+        followButton.anchor(top: nil, left: nil, bottom: nil, right: self.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 12, width: 90, height: 30)
         followButton.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        
+        textLabel?.text = "Username"
+        detailTextLabel?.text = "fullname"
+        self.selectionStyle = .none
     }
     
     required init?(coder: NSCoder) {
