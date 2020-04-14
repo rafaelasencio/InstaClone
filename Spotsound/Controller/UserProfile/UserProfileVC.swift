@@ -15,9 +15,7 @@ private let userProfileHeaderCell = "UserProfileHeaderCell"
 class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
     
-    var currentUser: User?
-    
-    var userToLoadFromSearchVC: User?
+    var user: User?
     
     override func viewDidLoad() {
         self.collectionView.backgroundColor = .white
@@ -25,7 +23,7 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
         self.collectionView!.register(UserProfileHeaderCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: userProfileHeaderCell)
         
         //fetch is user is not current user.
-        if userToLoadFromSearchVC == nil {
+        if self.user == nil {
             fetchCurrentUserData()
         }
     }
@@ -55,14 +53,12 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
         
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: userProfileHeaderCell, for: indexPath) as! UserProfileHeaderCell
         
+        // set delegate
         header.delegate = self
         
-        if let user = self.currentUser {
-            header.user = user
-        } else if let userToLoadFromSearchVC = self.userToLoadFromSearchVC {
-            header.user = userToLoadFromSearchVC
-            navigationItem.title = userToLoadFromSearchVC.username
-        }
+        header.user = self.user
+        
+        navigationItem.title = user?.username
         
         return header
     }
@@ -80,7 +76,7 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
             
             let uid = snapshot.key
             let user = User(uid: uid, dict: dictValues)
-            self.currentUser = user
+            self.user = user
             self.navigationItem.title = user.username
             self.collectionView.reloadData()
         }
@@ -92,12 +88,14 @@ extension UserProfileVC: UserProfileHeaderCellDelegate {
     func handleFollowersButtonTapped(for header: UserProfileHeaderCell) {
         let followVC = FollowVC()
         followVC.viewFollowers = true
+        followVC.uid = user?.uid
         navigationController?.pushViewController(followVC, animated: true)
     }
     
     func handleFollowingButtonTapped(for header: UserProfileHeaderCell) {
         let followVC = FollowVC()
         followVC.viewFollowing = true
+        followVC.uid = user?.uid
         navigationController?.pushViewController(followVC, animated: true)
     }
     
@@ -105,11 +103,9 @@ extension UserProfileVC: UserProfileHeaderCellDelegate {
         guard let user = header.user else {return}
         
         if header.editProfileFollowButton.titleLabel?.text == "Edit Profile" {
-            //Go to EditProfileVC
             print("go to EditProfileVC")
             
         } else {
-            
             if header.editProfileFollowButton.titleLabel?.text == "Follow" {
                 header.editProfileFollowButton.setTitle("Following", for: .normal)
                 

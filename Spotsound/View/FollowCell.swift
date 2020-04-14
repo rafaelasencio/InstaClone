@@ -10,7 +10,20 @@ import UIKit
 
 class FollowCell: UITableViewCell {
 
+    
     //MARK: - Properties
+    
+    var user: User? {
+           didSet {
+               guard let profileImageUrl = user?.profileImageUrl else {return}
+               guard let fullname = user?.name else {return}
+               guard let username = user?.username else {return}
+               
+               profileImageView.loadImage(with: profileImageUrl)
+               self.textLabel?.text = username
+               self.detailTextLabel?.text = fullname
+           }
+       }
     
     let profileImageView: UIImageView = {
        let iv = UIImageView()
