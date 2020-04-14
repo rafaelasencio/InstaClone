@@ -12,6 +12,9 @@ import Firebase
 
 class UserProfileHeaderCell: UICollectionViewCell {
     
+    
+    //MARK: - Properties
+    
     var delegate: UserProfileHeaderCellDelegate?
     
     var user: User? {
@@ -119,32 +122,7 @@ class UserProfileHeaderCell: UICollectionViewCell {
     }
     
     func setUserStats(for user: User?){
-        var numberOfFollowers: Int!
-        
-        guard let uid = user?.uid else {return}
-        USER_FOLLOWER_REF.child(uid).observeSingleEvent(of: .value) { (snapshot) in
-            if let snapshot = snapshot.value as? Dictionary<String, AnyObject>{
-                numberOfFollowers = snapshot.count
-            } else {
-                numberOfFollowers = 0
-            }
-            let attributedText = NSMutableAttributedString(string: "\(numberOfFollowers!)\n", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14)])
-            attributedText.append(NSAttributedString(string: "followers", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.lightGray]))
-            self.followersLabel.attributedText = attributedText
-        }
-        var numberOfFollowings: Int!
-        
-        USER_FOLLOWING_REF.child(uid).observeSingleEvent(of: .value) { (snapshot) in
-            if let snapshot = snapshot.value as? Dictionary<String, AnyObject>{
-                numberOfFollowings = snapshot.count
-            } else {
-                numberOfFollowings = 0
-            }
-            let attributedText = NSMutableAttributedString(string: "\(numberOfFollowings!)\n", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14)])
-            attributedText.append(NSAttributedString(string: "following", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.lightGray]))
-            self.followingLabel.attributedText = attributedText
-        }
-        
+        delegate?.handleSetUserStats(for: self)
     }
     
     func configureBottomToolBar(){
@@ -169,11 +147,12 @@ class UserProfileHeaderCell: UICollectionViewCell {
         guard let user = self.user else {return}
         
         if currentUserUid == user.uid {
+            // Configure button for current user
             editProfileFollowButton.setTitle("Edit Profile", for: .normal)
         } else {
             editProfileFollowButton.setTitleColor(.white, for: .normal)
             editProfileFollowButton.backgroundColor = UIColor(red: 17/255, green: 154/255, blue: 237/255, alpha: 1)
-            
+            // Perform task before set button title
             user.checkIfUserIsFollowed { (followed) in
                 if followed {
                     self.editProfileFollowButton.setTitle("Following", for: .normal)
@@ -184,6 +163,8 @@ class UserProfileHeaderCell: UICollectionViewCell {
         }
     }
     
+    //MARK: - Handlers
+    
     @objc func handleFollowersTapped() {
         delegate?.handleFollowersButtonTapped(for: self)
     }
@@ -193,10 +174,11 @@ class UserProfileHeaderCell: UICollectionViewCell {
     }
 
     @objc func handleEditProfileFollow() {
-        print("tapped")
         delegate?.handleEditProfileButtonTapped(for: self)
     }
     
+    
+    //MARK: - Init
     
     override init(frame: CGRect) {
         super.init(frame: frame)

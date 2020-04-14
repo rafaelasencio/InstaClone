@@ -120,7 +120,33 @@ extension UserProfileVC: UserProfileHeaderCellDelegate {
     }
     
     func handleSetUserStats(for header: UserProfileHeaderCell) {
+        var numberOfFollowers: Int!
+        var numberOfFollowings: Int!
+        guard let uid = header.user?.uid else {return}
         
+        //observe instead observeSingleEvent to update data in realtime
+        USER_FOLLOWER_REF.child(uid).observe(.value) { (snapshot) in
+            if let snapshot = snapshot.value as? Dictionary<String, AnyObject>{
+                numberOfFollowers = snapshot.count
+            } else {
+                numberOfFollowers = 0
+            }
+            let attributedText = NSMutableAttributedString(string: "\(numberOfFollowers!)\n", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14)])
+            attributedText.append(NSAttributedString(string: "followers", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.lightGray]))
+            header.followersLabel.attributedText = attributedText
+        }
+        
+        
+        USER_FOLLOWING_REF.child(uid).observe(.value) { (snapshot) in
+            if let snapshot = snapshot.value as? Dictionary<String, AnyObject>{
+                numberOfFollowings = snapshot.count
+            } else {
+                numberOfFollowings = 0
+            }
+            let attributedText = NSMutableAttributedString(string: "\(numberOfFollowings!)\n", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14)])
+            attributedText.append(NSAttributedString(string: "following", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.lightGray]))
+            header.followingLabel.attributedText = attributedText
+        }
     }
     
     
