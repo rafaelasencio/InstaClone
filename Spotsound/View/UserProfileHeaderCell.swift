@@ -54,20 +54,32 @@ class UserProfileHeaderCell: UICollectionViewCell {
         return lbl
     }()
     
-    let followersLabel: UILabel = {
+    lazy var followersLabel: UILabel = {
         let lbl = UILabel()
         lbl.numberOfLines = 0
         lbl.textAlignment = .center
+        let attributedText = NSMutableAttributedString(string: "\n", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14)])
+        attributedText.append(NSAttributedString(string: "followers", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.lightGray]))
+        lbl.attributedText = attributedText
+        
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(handleFollowersTapped))
+        gesture.numberOfTapsRequired = 1
+        lbl.isUserInteractionEnabled = true
+        lbl.addGestureRecognizer(gesture)
         return lbl
     }()
     
-    let followingLabel: UILabel = {
+    lazy var followingLabel: UILabel = {
         let lbl = UILabel()
         lbl.numberOfLines = 0
         lbl.textAlignment = .center
-        let attributedText = NSMutableAttributedString(string: "5\n", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14)])
+        let attributedText = NSMutableAttributedString(string: "\n", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14)])
         attributedText.append(NSAttributedString(string: "following", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.lightGray]))
         lbl.attributedText = attributedText
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(handleFollowingTapped))
+        gesture.numberOfTapsRequired = 1
+        lbl.isUserInteractionEnabled = true
+        lbl.addGestureRecognizer(gesture)
         return lbl
     }()
     

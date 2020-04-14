@@ -31,6 +31,8 @@
 		7364E46C2444CC7700A7376A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7364E46B2444CC7700A7376A /* Constants.swift */; };
 		7364E46E2444D8BC00A7376A /* EditProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7364E46D2444D8BC00A7376A /* EditProfileController.swift */; };
 		7364E4702444DB4D00A7376A /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7364E46F2444DB4D00A7376A /* CustomImageView.swift */; };
+		7364E4722445DA8F00A7376A /* FollowVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7364E4712445DA8F00A7376A /* FollowVC.swift */; };
+		7364E4742445DB3300A7376A /* FollowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7364E4732445DB3300A7376A /* FollowCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +62,8 @@
 		7364E46B2444CC7700A7376A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		7364E46D2444D8BC00A7376A /* EditProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileController.swift; sourceTree = "<group>"; };
 		7364E46F2444DB4D00A7376A /* CustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
+		7364E4712445DA8F00A7376A /* FollowVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowVC.swift; sourceTree = "<group>"; };
+		7364E4732445DB3300A7376A /* FollowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowCell.swift; sourceTree = "<group>"; };
 		99BC0CE9D89A5761B6DF0653 /* Pods_Spotsound.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Spotsound.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A90EF7ADEB13601E6FCCCDF /* Pods-Spotsound.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spotsound.debug.xcconfig"; path = "Target Support Files/Pods-Spotsound/Pods-Spotsound.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -143,6 +147,7 @@
 			children = (
 				7364E4632443CF7100A7376A /* UserProfileHeaderCell.swift */,
 				7364E4672443FCD500A7376A /* SearchUserCell.swift */,
+				7364E4732445DB3300A7376A /* FollowCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -202,6 +207,7 @@
 			children = (
 				7364E45A2443AC4F00A7376A /* UserProfileVC.swift */,
 				7364E46D2444D8BC00A7376A /* EditProfileController.swift */,
+				7364E4712445DA8F00A7376A /* FollowVC.swift */,
 			);
 			path = UserProfile;
 			sourceTree = "<group>";
@@ -356,6 +362,7 @@
 				7364E4552443ABBB00A7376A /* SearchVC.swift in Sources */,
 				7364E4662443EB3F00A7376A /* User.swift in Sources */,
 				7364E4592443AC4100A7376A /* NotificationsVC.swift in Sources */,
+				7364E4742445DB3300A7376A /* FollowCell.swift in Sources */,
 				7364E4482442911B00A7376A /* LoginVC.swift in Sources */,
 				7364E46E2444D8BC00A7376A /* EditProfileController.swift in Sources */,
 				7364E4702444DB4D00A7376A /* CustomImageView.swift in Sources */,
@@ -363,6 +370,7 @@
 				7364E44D2442AB3100A7376A /* SignUpVC.swift in Sources */,
 				7364E45124439B4300A7376A /* MainTabVC.swift in Sources */,
 				7364E4332442908A00A7376A /* SceneDelegate.swift in Sources */,
+				7364E4722445DA8F00A7376A /* FollowVC.swift in Sources */,
 				7364E45B2443AC4F00A7376A /* UserProfileVC.swift in Sources */,
 				7364E46A2444C02A00A7376A /* Protocols.swift in Sources */,
 			);

@@ -90,12 +90,15 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
 
 extension UserProfileVC: UserProfileHeaderCellDelegate {
     func handleFollowersButtonTapped(for header: UserProfileHeaderCell) {
-//        let followVC = FollowLikeVC()
-        print("go to FollowLikeVC")
+        let followVC = FollowVC()
+        followVC.viewFollowers = true
+        navigationController?.pushViewController(followVC, animated: true)
     }
     
     func handleFollowingButtonTapped(for header: UserProfileHeaderCell) {
-        print("go to FollowLikeVC")
+        let followVC = FollowVC()
+        followVC.viewFollowing = true
+        navigationController?.pushViewController(followVC, animated: true)
     }
     
     func handleEditProfileButtonTapped(for header: UserProfileHeaderCell) {
