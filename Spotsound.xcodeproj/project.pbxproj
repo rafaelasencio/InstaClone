@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		4FBD3138404015FFE586BAB0 /* Pods_Spotsound.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99BC0CE9D89A5761B6DF0653 /* Pods_Spotsound.framework */; };
+		7362C698244692780022BC5A /* SelectImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7362C697244692780022BC5A /* SelectImageVC.swift */; };
+		7362C69A244693310022BC5A /* SelectPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7362C699244693310022BC5A /* SelectPhotoCell.swift */; };
+		7362C69C2446936F0022BC5A /* SelectPhotoHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7362C69B2446936F0022BC5A /* SelectPhotoHeader.swift */; };
 		7364E4312442908A00A7376A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7364E4302442908A00A7376A /* AppDelegate.swift */; };
 		7364E4332442908A00A7376A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7364E4322442908A00A7376A /* SceneDelegate.swift */; };
 		7364E4352442908A00A7376A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7364E4342442908A00A7376A /* ViewController.swift */; };
@@ -37,6 +40,9 @@
 
 /* Begin PBXFileReference section */
 		4A24B677765020F039AB40E2 /* Pods-Spotsound.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spotsound.release.xcconfig"; path = "Target Support Files/Pods-Spotsound/Pods-Spotsound.release.xcconfig"; sourceTree = "<group>"; };
+		7362C697244692780022BC5A /* SelectImageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectImageVC.swift; sourceTree = "<group>"; };
+		7362C699244693310022BC5A /* SelectPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPhotoCell.swift; sourceTree = "<group>"; };
+		7362C69B2446936F0022BC5A /* SelectPhotoHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPhotoHeader.swift; sourceTree = "<group>"; };
 		7364E42D2442908A00A7376A /* Spotsound.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spotsound.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7364E4302442908A00A7376A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7364E4322442908A00A7376A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -148,6 +154,8 @@
 				7364E4632443CF7100A7376A /* UserProfileHeaderCell.swift */,
 				7364E4672443FCD500A7376A /* SearchUserCell.swift */,
 				7364E4732445DB3300A7376A /* FollowCell.swift */,
+				7362C699244693310022BC5A /* SelectPhotoCell.swift */,
+				7362C69B2446936F0022BC5A /* SelectPhotoHeader.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -232,6 +240,7 @@
 			isa = PBXGroup;
 			children = (
 				7364E4562443AC0E00A7376A /* UploadPostVC.swift */,
+				7362C697244692780022BC5A /* SelectImageVC.swift */,
 			);
 			path = UploadPost;
 			sourceTree = "<group>";
@@ -356,10 +365,13 @@
 				7364E46C2444CC7700A7376A /* Constants.swift in Sources */,
 				7364E44B2442955500A7376A /* Extensions.swift in Sources */,
 				7364E4572443AC0E00A7376A /* UploadPostVC.swift in Sources */,
+				7362C69A244693310022BC5A /* SelectPhotoCell.swift in Sources */,
+				7362C69C2446936F0022BC5A /* SelectPhotoHeader.swift in Sources */,
 				7364E4352442908A00A7376A /* ViewController.swift in Sources */,
 				7364E4312442908A00A7376A /* AppDelegate.swift in Sources */,
 				7364E4682443FCD500A7376A /* SearchUserCell.swift in Sources */,
 				7364E4552443ABBB00A7376A /* SearchVC.swift in Sources */,
+				7362C698244692780022BC5A /* SelectImageVC.swift in Sources */,
 				7364E4662443EB3F00A7376A /* User.swift in Sources */,
 				7364E4592443AC4100A7376A /* NotificationsVC.swift in Sources */,
 				7364E4742445DB3300A7376A /* FollowCell.swift in Sources */,
