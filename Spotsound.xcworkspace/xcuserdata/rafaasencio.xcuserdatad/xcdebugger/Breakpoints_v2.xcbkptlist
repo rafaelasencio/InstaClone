@@ -169,8 +169,8 @@
             filePath = "Spotsound/Controller/UserProfile/UserProfileVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
             landmarkName = "fetchCurrentUserData()"
             landmarkType = "7">
          </BreakpointContent>
@@ -185,8 +185,8 @@
             filePath = "Spotsound/Controller/UserProfile/UserProfileVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
             landmarkName = "fetchCurrentUserData()"
             landmarkType = "7">
          </BreakpointContent>
@@ -201,8 +201,8 @@
             filePath = "Spotsound/Controller/UserProfile/UserProfileVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
             landmarkName = "collectionView(_:viewForSupplementaryElementOfKind:at:)"
             landmarkType = "7">
          </BreakpointContent>

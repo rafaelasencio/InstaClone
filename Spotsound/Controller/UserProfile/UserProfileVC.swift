@@ -20,7 +20,7 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
     
     override func viewDidLoad() {
         self.collectionView.backgroundColor = .white
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView!.register(UserPostCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView!.register(UserProfileHeaderCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: userProfileHeaderCell)
         
         //fetch is user is not current user.
@@ -32,6 +32,26 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
         fetchPost()
     }
     
+    // MARK: - UICollectionViewFlowLayout
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 1 
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = (self.view.frame.width - 2) / 3
+        return CGSize(width: width, height: width)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: view.frame.width, height: 200)
+    }
+    
+    
     // MARK: UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -41,14 +61,14 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return 0
+
+        return posts.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! UserPostCell
     
-        // Configure the cell
+        cell.post = posts[indexPath.row]
     
         return cell
     }
@@ -67,24 +87,30 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
         return header
     }
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: view.frame.width, height: 200)
-    }
     
     //MARK: - Api
     
     func fetchPost(){
         
-        guard let currentUserId = Auth.auth().currentUser?.uid else {return}
+        var uid: String!
+        
+        if let user = self.user {
+            uid = user.uid
+        } else {
+            uid = Auth.auth().currentUser?.uid
+        }
+
         
         //.childAdded to know when post get added to the structure
-        USER_POST_REF.child(currentUserId).observe(.childAdded) { (snapshot) in
+        USER_POST_REF.child(uid).observe(.childAdded) { (snapshot) in
             let postId = snapshot.key
+            
             POSTS_REF.child(postId).observeSingleEvent(of: .value) { (snapshot) in
                 guard let dictionary = snapshot.value as? Dictionary<String, AnyObject> else {return}
                 let post = Post(postId: postId, dicctionary: dictionary)
                 self.posts.append(post)
-                print("post \(post.caption)")
+                self.posts.sort(by: {$0.creationDate > $1.creationDate})
+                self.collectionView.reloadData()
             }
         }
     }
@@ -107,6 +133,9 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
 }
 
 extension UserProfileVC: UserProfileHeaderCellDelegate {
+    
+    //MARK: - Handlers
+    
     func handleFollowersButtonTapped(for header: UserProfileHeaderCell) {
         let followVC = FollowVC()
         followVC.viewFollowers = true
