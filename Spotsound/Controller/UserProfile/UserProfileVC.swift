@@ -67,6 +67,12 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
         return CGSize(width: view.frame.width, height: 200)
     }
     
+    //MARK: - Api
+    
+    func fetchPost(){
+        
+    }
+    
     func fetchCurrentUserData(){
         // set user property in UserProfileHeaderCell
         guard let currentUserUid = Auth.auth().currentUser?.uid else {return}

@@ -20,6 +20,7 @@ class SelectImageVC: UICollectionViewController, UICollectionViewDelegateFlowLay
     var images = [UIImage]()
     var assets = [PHAsset]()
     var selectedImage: UIImage?
+    var header: SelectPhotoHeader?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,6 +80,8 @@ class SelectImageVC: UICollectionViewController, UICollectionViewDelegateFlowLay
         
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerIdentifier, for: indexPath) as! SelectPhotoHeader
         
+        self.header = header
+        
         if let selectedImage = self.selectedImage {
             //index selected images
             if let index = self.images.firstIndex(of: selectedImage) {
@@ -109,7 +112,9 @@ class SelectImageVC: UICollectionViewController, UICollectionViewDelegateFlowLay
     }
     
     @objc func handleNext(){
-           print("handle next..")
+        let uploadPostVC = UploadPostVC()
+        uploadPostVC.selectedImage = header?.photoImageView.image
+        self.navigationController?.pushViewController(uploadPostVC, animated: true)
        }
     
     func configureNavigationButtons() {
