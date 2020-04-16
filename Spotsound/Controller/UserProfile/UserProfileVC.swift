@@ -16,6 +16,7 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
 
     
     var user: User?
+    var posts = [Post]()
     
     override func viewDidLoad() {
         self.collectionView.backgroundColor = .white
@@ -26,6 +27,9 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
         if self.user == nil {
             fetchCurrentUserData()
         }
+        
+        //fetch posts
+        fetchPost()
     }
     
     // MARK: UICollectionViewDataSource
@@ -71,6 +75,18 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
     
     func fetchPost(){
         
+        guard let currentUserId = Auth.auth().currentUser?.uid else {return}
+        
+        //.childAdded to know when post get added to the structure
+        USER_POST_REF.child(currentUserId).observe(.childAdded) { (snapshot) in
+            let postId = snapshot.key
+            POSTS_REF.child(postId).observeSingleEvent(of: .value) { (snapshot) in
+                guard let dictionary = snapshot.value as? Dictionary<String, AnyObject> else {return}
+                let post = Post(postId: postId, dicctionary: dictionary)
+                self.posts.append(post)
+                print("post \(post.caption)")
+            }
+        }
     }
     
     func fetchCurrentUserData(){
