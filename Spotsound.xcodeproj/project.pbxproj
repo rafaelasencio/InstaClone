@@ -38,6 +38,7 @@
 		7364E4742445DB3300A7376A /* FollowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7364E4732445DB3300A7376A /* FollowCell.swift */; };
 		739B8D802448AC6000F35C3E /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739B8D7F2448AC6000F35C3E /* Post.swift */; };
 		739B8D8224490ABA00F35C3E /* UserPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739B8D8124490ABA00F35C3E /* UserPostCell.swift */; };
+		739B8D8424492D3400F35C3E /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739B8D8324492D3400F35C3E /* FeedCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		7364E4732445DB3300A7376A /* FollowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowCell.swift; sourceTree = "<group>"; };
 		739B8D7F2448AC6000F35C3E /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		739B8D8124490ABA00F35C3E /* UserPostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPostCell.swift; sourceTree = "<group>"; };
+		739B8D8324492D3400F35C3E /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		99BC0CE9D89A5761B6DF0653 /* Pods_Spotsound.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Spotsound.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A90EF7ADEB13601E6FCCCDF /* Pods-Spotsound.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spotsound.debug.xcconfig"; path = "Target Support Files/Pods-Spotsound/Pods-Spotsound.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -162,6 +164,7 @@
 				7362C699244693310022BC5A /* SelectPhotoCell.swift */,
 				7362C69B2446936F0022BC5A /* SelectPhotoHeader.swift */,
 				739B8D8124490ABA00F35C3E /* UserPostCell.swift */,
+				739B8D8324492D3400F35C3E /* FeedCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -375,6 +378,7 @@
 				7362C69C2446936F0022BC5A /* SelectPhotoHeader.swift in Sources */,
 				7364E4352442908A00A7376A /* ViewController.swift in Sources */,
 				7364E4312442908A00A7376A /* AppDelegate.swift in Sources */,
+				739B8D8424492D3400F35C3E /* FeedCell.swift in Sources */,
 				739B8D8224490ABA00F35C3E /* UserPostCell.swift in Sources */,
 				7364E4682443FCD500A7376A /* SearchUserCell.swift in Sources */,
 				739B8D802448AC6000F35C3E /* Post.swift in Sources */,
