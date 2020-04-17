@@ -17,8 +17,8 @@ class UserPostCell: UICollectionViewCell {
         }
     }
     
-    let postImageView: UIImageView = {
-       let iv = UIImageView()
+    let postImageView: CustomImageView = {
+       let iv = CustomImageView()
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         iv.backgroundColor = .lightGray

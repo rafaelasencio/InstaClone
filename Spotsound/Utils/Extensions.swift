@@ -41,35 +41,9 @@ extension UIView {
     }
 }
 
-var imageInCache = [String: UIImage]()
 
 extension UIImageView {
     
-    func loadImage(with urlString: String){
-        
-        if let imageCache = imageInCache[urlString] {
-            self.image = imageCache
-            return
-        }
-        
-        guard let url = URL(string: urlString) else {return}
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if let error = error {
-                print("Failed load user profile image", error.localizedDescription)
-                return
-            }
-            
-            guard let data = data else {return}
-            let photoImage = UIImage(data: data)
-            imageInCache[url.absoluteString] = photoImage
-            
-            DispatchQueue.main.async {
-                self.image = photoImage
-            }
-            return
-            
-        }.resume()
-    }
 }
 
 extension Database {
