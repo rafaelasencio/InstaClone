@@ -13,6 +13,11 @@ private let identifier = "cellId"
 
 class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
+    
+    //MARK: - Properties
+    
+    var posts = [Post]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.collectionView.backgroundColor = .white
@@ -20,7 +25,11 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         self.collectionView.register(FeedCell.self, forCellWithReuseIdentifier: identifier)
         
         configureNavigationBar()
+        
+        // fetchPost
+        fetchPost()
     }
+    
     
     //MARK: - UICollectionViewDelegateFlowLayout
     
@@ -41,12 +50,15 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return posts.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! FeedCell
+        
+        cell.post = posts[indexPath.row]
+        
         return cell
     }
     
@@ -86,6 +98,23 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         self.present(alertController, animated: true, completion: nil)
+    }
+    
+    //MARK: - Api
+    
+    func fetchPost(){
+        
+        POSTS_REF.observe(.childAdded) { (snapshot) in
+            
+            let postId = snapshot.key
+            guard let dictionary = snapshot.value as? Dictionary<String, AnyObject> else {return}
+            
+            let post = Post(postId: postId, dicctionary: dictionary)
+            self.posts.append(post)
+            self.posts.sort(by: {$0.creationDate > $1.creationDate})
+            
+            self.collectionView.reloadData()
+        }
     }
 
 }

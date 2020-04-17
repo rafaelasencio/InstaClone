@@ -7,8 +7,27 @@
 //
 
 import UIKit
+import Firebase
 
 class FeedCell: UICollectionViewCell {
+    
+    var post: Post? {
+        
+        didSet {
+            guard let ownerUid = post?.ownerId else {return}
+            guard let imageURL = post?.imageUrl else {return}
+            
+            Database.fetchUser(with: ownerUid) { (user) in
+                self.profileImageView.loadImage(with: user.profileImageUrl)
+                self.usernameButton.setTitle(user.username, for: .normal)
+                self.configurePostCaption(user: user)
+            }
+            
+            self.postImageView.loadImage(with: imageURL)
+            guard let likes = post?.likes else {return}
+            self.likesLabel.text = "\(likes) likes"
+        }
+    }
     
     let profileImageView: CustomImageView = {
        let iv = CustomImageView()
@@ -78,12 +97,7 @@ class FeedCell: UICollectionViewCell {
     }()
     
     let captionLabel: UILabel = {
-       let lbl = UILabel()
-        
-        let attributedText = NSMutableAttributedString(string: "Username", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 12)])
-        attributedText.append(NSAttributedString(string: " Some text caption for now", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12)]))
-        
-        lbl.attributedText = attributedText
+        let lbl = UILabel()
         return lbl
     }()
     
@@ -136,6 +150,16 @@ class FeedCell: UICollectionViewCell {
         
         self.addSubview(savePostButton)
         savePostButton.anchor(top: self.postImageView.bottomAnchor, left: nil, bottom: nil, right: self.rightAnchor, paddingTop: 10, paddingLeft: 0, paddingBottom: 0, paddingRight: 8, width: 20, height: 24)
+        
+    }
+    
+    func configurePostCaption(user: User) {
+        
+        guard let post = self.post else {return}
+        guard let caption = post.caption else {return}
+        let attributedText = NSMutableAttributedString(string: user.username, attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 12)])
+        attributedText.append(NSAttributedString(string: " \(caption)", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12)]))
+        self.captionLabel.attributedText = attributedText
         
     }
     

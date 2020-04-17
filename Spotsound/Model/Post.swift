@@ -17,6 +17,7 @@ class Post {
     var postId: String!
     
     init(postId: String, dicctionary: Dictionary<String, AnyObject>) {
+        
         self.postId = postId
         
         if let caption = dicctionary["caption"] as? String {
@@ -31,7 +32,7 @@ class Post {
             self.imageUrl = imageUrl
         }
         
-        if let ownerId = dicctionary["ownerId"] as? String {
+        if let ownerId = dicctionary["ownerUid"] as? String {
             self.ownerId = ownerId
         }
         
@@ -39,9 +40,6 @@ class Post {
             self.creationDate = Date(timeIntervalSince1970: creationDate)
         }
         
-        if let postId = dicctionary["postId"] as? String {
-            self.postId = postId
-        }
     }
 }
 
