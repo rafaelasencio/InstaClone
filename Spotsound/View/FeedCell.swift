@@ -11,6 +11,8 @@ import Firebase
 
 class FeedCell: UICollectionViewCell {
     
+    var delegate: FeedCellDelegate?
+    
     var post: Post? {
         
         didSet {
@@ -37,22 +39,6 @@ class FeedCell: UICollectionViewCell {
         return iv
     }()
     
-    let usernameButton: UIButton = {
-        let btn = UIButton(type: .system)
-        btn.setTitle("username", for: .normal)
-        btn.setTitleColor(.black, for: .normal)
-        btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
-        return btn
-    }()
-    
-    let optionsButton: UIButton = {
-        let btn = UIButton(type: .system)
-        btn.setTitle("•••", for: .normal)
-        btn.setTitleColor(.black, for: .normal)
-        btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-        return btn
-    }()
-    
     let postImageView: CustomImageView = {
        let iv = CustomImageView()
         iv.contentMode = .scaleAspectFill
@@ -61,21 +47,41 @@ class FeedCell: UICollectionViewCell {
         return iv
     }()
     
-    let likeButton: UIButton = {
+    lazy var usernameButton: UIButton = {
+        let btn = UIButton(type: .system)
+        btn.setTitle("username", for: .normal)
+        btn.setTitleColor(.black, for: .normal)
+        btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
+        btn.addTarget(self, action: #selector(handleUsernameTapped), for: .touchUpInside)
+        return btn
+    }()
+    
+    lazy var optionsButton: UIButton = {
+        let btn = UIButton(type: .system)
+        btn.setTitle("•••", for: .normal)
+        btn.setTitleColor(.black, for: .normal)
+        btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        btn.addTarget(self, action: #selector(handleOptionTapped), for: .touchUpInside)
+        return btn
+    }()
+    
+    lazy var likeButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.setImage(#imageLiteral(resourceName: "like_unselected"), for: .normal)
         btn.tintColor = .black
+        btn.addTarget(self, action: #selector(handleLikeTapped), for: .touchUpInside)
         return btn
     }()
     
-    let commentButton: UIButton = {
+    lazy var commentButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.setImage(#imageLiteral(resourceName: "comment"), for: .normal)
         btn.tintColor = .black
+        btn.addTarget(self, action: #selector(handleCommentTapped), for: .touchUpInside)
         return btn
     }()
     
-    let messageButton: UIButton = {
+    lazy var messageButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.setImage(#imageLiteral(resourceName: "send2"), for: .normal)
         btn.tintColor = .black
@@ -165,5 +171,23 @@ class FeedCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    //MARK: Handlers
+    
+    @objc func handleUsernameTapped(){
+        delegate?.handleUsernameTapped(for: self)
+    }
+    
+    @objc func handleOptionTapped(){
+        delegate?.handleOptionsTapped(for: self)
+    }
+    
+    @objc func handleCommentTapped(){
+        delegate?.handleCommentTapped(for: self)
+    }
+    
+    @objc func handleLikeTapped(){
+        delegate?.handleLikeTapped(for: self)
     }
 }

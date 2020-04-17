@@ -11,7 +11,7 @@ import Firebase
 
 private let identifier = "cellId"
 
-class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, FeedCellDelegate {
 
     
     //MARK: - Properties
@@ -56,6 +56,7 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! FeedCell
+        cell.delegate = self
         
         cell.post = posts[indexPath.row]
         
@@ -69,6 +70,28 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         self.navigationItem.title = "Feed"
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "send2"), style: .plain, target: self, action: #selector(handleShowMessages))
+    }
+    
+    //MARK: - FeedCellDelegate
+    
+    func handleUsernameTapped(for cell: FeedCell) {
+        
+        guard let post = cell.post else {return}
+        let userProfileVC = UserProfileVC(collectionViewLayout: UICollectionViewFlowLayout())
+        userProfileVC.user = post.user
+        navigationController?.pushViewController(userProfileVC, animated: true)
+    }
+    
+    func handleOptionsTapped(for cell: FeedCell) {
+        print("options")
+    }
+    
+    func handleLikeTapped(for cell: FeedCell) {
+        print("liked")
+    }
+    
+    func handleCommentTapped(for cell: FeedCell) {
+        print("comment")
     }
     
     //MARK: - Handlers
@@ -107,13 +130,12 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         POSTS_REF.observe(.childAdded) { (snapshot) in
             
             let postId = snapshot.key
-            guard let dictionary = snapshot.value as? Dictionary<String, AnyObject> else {return}
             
-            let post = Post(postId: postId, dicctionary: dictionary)
-            self.posts.append(post)
-            self.posts.sort(by: {$0.creationDate > $1.creationDate})
-            
-            self.collectionView.reloadData()
+            Database.fetchPost(with: postId) { (post) in
+                self.posts.append(post)
+                self.posts.sort(by: {$0.creationDate > $1.creationDate})
+                self.collectionView.reloadData()
+            }
         }
     }
 
