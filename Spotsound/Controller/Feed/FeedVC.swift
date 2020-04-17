@@ -17,6 +17,8 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
     //MARK: - Properties
     
     var posts = [Post]()
+    var viewSinglePost = false
+    var post: Post?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,8 +28,10 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
         
         configureNavigationBar()
         
-        // fetchPost
-        fetchPost()
+        // fetch post 
+        if !viewSinglePost {
+            fetchPost()
+        }
     }
     
     
@@ -50,7 +54,8 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return posts.count
+        
+        return viewSinglePost ?  1 : posts.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -58,14 +63,24 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! FeedCell
         cell.delegate = self
         
-        cell.post = posts[indexPath.row]
+        if viewSinglePost {
+            if let post = self.post {
+                cell.post = post
+            }
+        } else {
+            cell.post = posts[indexPath.row]
+        }
+        
         
         return cell
     }
     
     
     func configureNavigationBar(){
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
+        
+        if !viewSinglePost {
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
+        }
         
         self.navigationItem.title = "Feed"
         

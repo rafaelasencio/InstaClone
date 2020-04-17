@@ -52,7 +52,7 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
     }
     
     
-    // MARK: UICollectionViewDataSource
+    // MARK: UICollectionView
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -85,6 +85,14 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
         navigationItem.title = user?.username
         
         return header
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let feedVC = FeedVC(collectionViewLayout: UICollectionViewFlowLayout())
+        feedVC.viewSinglePost = true
+        feedVC.post = posts[indexPath.row]
+
+        navigationController?.pushViewController(feedVC, animated: true)
     }
 
     
