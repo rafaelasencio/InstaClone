@@ -109,7 +109,22 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
     }
     
     func handleLikeTapped(for cell: FeedCell) {
-        print("liked")
+        
+        guard let post = cell.post else {return}
+        
+        if post.didLike {
+            post.adjustLikes(addLike: false) { (likes) in
+                cell.likesLabel.text = "\(likes) likes"
+                cell.likeButton.setImage(#imageLiteral(resourceName: "like_unselected"), for: .normal)
+            }
+           
+        } else {
+            post.adjustLikes(addLike: true) { (likes) in
+                cell.likesLabel.text = "\(likes) likes"
+                cell.likeButton.setImage(#imageLiteral(resourceName: "like_selected"), for: .normal)
+            }
+            
+        }
     }
     
     func handleCommentTapped(for cell: FeedCell) {
