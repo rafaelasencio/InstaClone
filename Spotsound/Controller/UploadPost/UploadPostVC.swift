@@ -104,15 +104,18 @@ class UploadPostVC: UIViewController, UITextViewDelegate {
                 "imageUrl": postImageUrl,
                 "ownerUid": currentUserID] as [String: AnyObject]
                 
-                // post id
+                // post id "posts"
                 let postId = POSTS_REF.childByAutoId()
                 guard let postKey = postId.key else { return }
                 
-                // upload Info to DB
+                // upload Info to DB. [for each new post]
                 postId.updateChildValues(values) { (error, reference) in
                     
                     //add postId to current user posts
                     USER_POST_REF.child(currentUserID).updateChildValues([postKey: 1])
+                    
+                    //update user-feed structure
+                    self.updateUserFeeds(with: postKey)
                     
                     // return to home feed
                     self.dismiss(animated: true) {
@@ -141,6 +144,21 @@ class UploadPostVC: UIViewController, UITextViewDelegate {
         self.photoImageView.image = imageSelected
     }
     
-    
+    func updateUserFeeds(with postId: String) {
+        //current user uid
+        guard let currentUid = Auth.auth().currentUser?.uid else {return}
+        //database values
+        let values = [postId: 1]
+        //update follower feeds.
+        USER_FOLLOWER_REF.child(currentUid).observe(.childAdded) { (snapshot) in
+            
+            let followerUid = snapshot.key // currentUserId
+            //add to user-feed structure, the current user id and posts related
+            USER_FEED_REF.child(followerUid).updateChildValues(values)
+        }
+        //update current user feed
+        USER_FEED_REF.child(currentUid).updateChildValues(values)
+        
+    }
 
 }

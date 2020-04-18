@@ -26,12 +26,19 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
 
         self.collectionView.register(FeedCell.self, forCellWithReuseIdentifier: identifier)
         
+        // configure refresh control
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
+        self.collectionView.refreshControl = refreshControl
         configureNavigationBar()
         
         // fetch post 
         if !viewSinglePost {
             fetchPost()
         }
+        
+        // update user feed
+        updateUserFeeds()
     }
     
     
@@ -110,6 +117,11 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
     }
     
     //MARK: - Handlers
+    @objc func handleRefresh(){
+        posts.removeAll(keepingCapacity: false)
+        fetchPost()
+        self.collectionView.reloadData()
+    }
     
     @objc func handleShowMessages() {
         print("handle show message")
@@ -140,15 +152,37 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
     
     //MARK: - Api
     
+    func updateUserFeeds() {
+        
+        guard let currentUserUid = Auth.auth().currentUser?.uid else {return}
+        
+        USER_FOLLOWING_REF.child(currentUserUid).observe(.childAdded) { (snapshot) in
+            let followingUserId = snapshot.key
+            USER_POST_REF.child(followingUserId).observe(.childAdded) { (snapshot) in
+                let postId = snapshot.key
+                //add on "user-feed" the currentUserId with posts of followed users
+                USER_FEED_REF.child(currentUserUid).updateChildValues([postId : 1])
+            }
+        }
+        USER_POST_REF.child(currentUserUid).observe(.childAdded) { (snapshot) in
+            let postId = snapshot.key
+            USER_FEED_REF.child(currentUserUid).updateChildValues([postId : 1])
+        }
+    }
     func fetchPost(){
         
-        POSTS_REF.observe(.childAdded) { (snapshot) in
+        guard let currentUid = Auth.auth().currentUser?.uid else {return}
+        USER_FEED_REF.child(currentUid).observe(.childAdded) { (snapshot) in
             
             let postId = snapshot.key
             
             Database.fetchPost(with: postId) { (post) in
                 self.posts.append(post)
                 self.posts.sort(by: {$0.creationDate > $1.creationDate})
+                
+                // stop refreshing
+                self.collectionView.refreshControl?.endRefreshing()
+                
                 self.collectionView.reloadData()
             }
         }
