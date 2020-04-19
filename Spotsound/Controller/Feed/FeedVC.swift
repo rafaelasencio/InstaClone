@@ -128,7 +128,12 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
     }
     
     func handleShowLikes(for cell: FeedCell) {
+        
+        guard let post = cell.post else {return}
+        guard let postId = post.postId else {return}
         let followLikeCell = FollowLikeVC()
+        followLikeCell.viewingMode = FollowLikeVC.ViewingMode(index: 2)
+        followLikeCell.postId = postId
         self.navigationController?.pushViewController(followLikeCell, animated: true)
         
     }

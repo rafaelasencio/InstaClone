@@ -14,8 +14,24 @@ private let reuseIdentifier = "FollowCell"
 class FollowLikeVC: UITableViewController {
     
     //MARK: - Properties
-    var viewFollowers = false
-    var viewFollowing = false
+    
+    enum ViewingMode: Int {
+        case Following
+        case Followers
+        case Likes
+        
+        init(index: Int){
+            switch index {
+            case 0: self = .Following
+            case 1: self = .Followers
+            case 2: self = .Likes
+            default: self = .Following
+            }
+        }
+    }
+    
+    var postId: String!
+    var viewingMode: ViewingMode!
     var uid: String?
     var users = [User]()
     
@@ -25,15 +41,13 @@ class FollowLikeVC: UITableViewController {
         //register cell
         tableView.register(FollowLikeCell.self, forCellReuseIdentifier: reuseIdentifier)
         
-        //configure nav
-        if viewFollowers {
-            navigationItem.title = "Followers"
-        } else {
-            navigationItem.title = "Following"
+        //configure nav controller and fetch users
+        if let viewingMode = self.viewingMode {
+            configureNavTitle(for: viewingMode)
+            fetchUsers(by: viewingMode)
         }
         tableView.separatorColor = .clear
         
-        fetchUsers()
     }
     
     //MARK: - TableView
@@ -64,32 +78,67 @@ class FollowLikeVC: UITableViewController {
         navigationController?.pushViewController(userProfileVC, animated: true)
     }
     
-    func fetchUsers(){
-        
-        guard let currentUserID = self.uid else {return}
-        var ref: DatabaseReference!
-        
-        //Control flow to determine database section to access
-        if viewFollowers {
-            ref = USER_FOLLOWER_REF
-        } else {
-            ref = USER_FOLLOWING_REF
+    //MARK: - Handlers
+    
+    func configureNavTitle(for viewingMode: ViewingMode) {
+        switch viewingMode {
+            case .Followers: self.navigationItem.title = "Followers"
+            case .Following: self.navigationItem.title = "Following"
+            case .Likes: self.navigationItem.title = "Likes"
         }
-        //.childAdded is going to observe every time value is added
-        ref.child(currentUserID).observeSingleEvent(of: .value) { (snapshot) in
+    }
+    
+    //MARK: - Api
+    
+    func getDatabaseReference() -> DatabaseReference? {
+        
+        guard let viewingMode = viewingMode else {return nil}
+        
+        switch viewingMode {
+            case .Followers: return USER_FOLLOWER_REF
+            case .Following: return USER_FOLLOWING_REF
+            case .Likes: return POST_LIKES_REF
+        }
+        
+    }
+    func fetchUsers(by viewingMode: ViewingMode){
+        
+        guard let ref = getDatabaseReference() else {return}
+        
+        switch viewingMode {
             
-            guard let allObjects = snapshot.children.allObjects as? [DataSnapshot] else {return}
-            
-            allObjects.forEach { (snapshot) in
+            case .Followers, .Following: //fetching users by currentUserUid
                 
-                let userId = snapshot.key
+                guard let currentUserUid = self.uid else {return}
                 
-                Database.fetchUser(with: userId) { (user) in
-                    self.users.append(user)
-                    self.tableView.reloadData()
+                ref.child(currentUserUid).observeSingleEvent(of: .value) { (snapshot) in
+                    
+                    guard let allObjects = snapshot.children.allObjects as? [DataSnapshot] else {return}
+                    allObjects.forEach { (snapshot) in
+                        
+                        let userId = snapshot.key
+                        
+                        Database.fetchUser(with: userId) { (user) in
+                            
+                            self.users.append(user)
+                            self.tableView.reloadData()
+                        }
+                    }
                 }
+            
+            case .Likes: //fetching users by postId
+            
+                guard let postId = self.postId else {return}
+                ref.child(postId).observe(.childAdded) { (snapshot) in
+                    let uid = snapshot.key
+                    Database.fetchUser(with: uid) { (user) in
+                        self.users.append(user)
+                        self.tableView.reloadData()
+                    }
+                    
             }
         }
+        
         
     }
 }
