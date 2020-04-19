@@ -1,5 +1,5 @@
 //
-//  FollowVC.swift
+//  FollowLikeVC.swift
 //  Spotsound
 //
 //  Created by Rafa Asencio on 14/04/2020.
@@ -11,7 +11,7 @@ import Firebase
 
 private let reuseIdentifier = "FollowCell"
 
-class FollowVC: UITableViewController {
+class FollowLikeVC: UITableViewController {
     
     //MARK: - Properties
     var viewFollowers = false
@@ -23,7 +23,7 @@ class FollowVC: UITableViewController {
         super.viewDidLoad()
         
         //register cell
-        tableView.register(FollowCell.self, forCellReuseIdentifier: reuseIdentifier)
+        tableView.register(FollowLikeCell.self, forCellReuseIdentifier: reuseIdentifier)
         
         //configure nav
         if viewFollowers {
@@ -50,7 +50,7 @@ class FollowVC: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! FollowCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! FollowLikeCell
         cell.user = users[indexPath.row]
         cell.delegate = self
         return cell
@@ -94,9 +94,9 @@ class FollowVC: UITableViewController {
     }
 }
 
-extension FollowVC: FollowCellDelegate {
+extension FollowLikeVC: FollowCellDelegate {
     
-    func handleFollowTapped(for cell: FollowCell) {
+    func handleFollowTapped(for cell: FollowLikeCell) {
         guard let user = cell.user else {return}
         
         if user.isFollowed {

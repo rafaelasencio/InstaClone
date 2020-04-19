@@ -143,14 +143,14 @@ extension UserProfileVC: UserProfileHeaderCellDelegate {
     //MARK: - Handlers
     
     func handleFollowersButtonTapped(for header: UserProfileHeaderCell) {
-        let followVC = FollowVC()
+        let followVC = FollowLikeVC()
         followVC.viewFollowers = true
         followVC.uid = user?.uid
         navigationController?.pushViewController(followVC, animated: true)
     }
     
     func handleFollowingButtonTapped(for header: UserProfileHeaderCell) {
-        let followVC = FollowVC()
+        let followVC = FollowLikeVC()
         followVC.viewFollowing = true
         followVC.uid = user?.uid
         navigationController?.pushViewController(followVC, animated: true)

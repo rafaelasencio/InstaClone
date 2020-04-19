@@ -127,6 +127,30 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
         }
     }
     
+    func handleShowLikes(for cell: FeedCell) {
+        let followLikeCell = FollowLikeVC()
+        self.navigationController?.pushViewController(followLikeCell, animated: true)
+        
+    }
+    
+    func handleConfigureLikeButton(for cell: FeedCell) {
+        guard let post = cell.post else {return}
+        guard let postId = post.postId else {return}
+        guard let currentUserUid = Auth.auth().currentUser?.uid else {return}
+        
+        USER_LIKES_REF.child(currentUserUid).observe(.value) { (snapshot) in
+            if snapshot.hasChild(postId) {
+                
+                post.didLike = true
+                cell.likeButton.setImage(#imageLiteral(resourceName: "like_selected"), for: .normal)
+            } else {
+                post.didLike = false
+                cell.likeButton.setImage(#imageLiteral(resourceName: "like_unselected"), for: .normal)
+            }
+        }
+    }
+    
+    
     func handleCommentTapped(for cell: FeedCell) {
         print("comment")
     }

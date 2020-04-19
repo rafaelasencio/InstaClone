@@ -28,6 +28,7 @@ class FeedCell: UICollectionViewCell {
             self.postImageView.loadImage(with: imageURL)
             guard let likes = post?.likes else {return}
             self.likesLabel.text = "\(likes) likes"
+            configureLikeButton()
         }
     }
     
@@ -95,10 +96,14 @@ class FeedCell: UICollectionViewCell {
         return btn
     }()
     
-    let likesLabel: UILabel = {
+    lazy var likesLabel: UILabel = {
        let lbl = UILabel()
         lbl.font = UIFont.boldSystemFont(ofSize: 12)
         lbl.text = "3 likes"
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(handleShowLikes))
+        gesture.numberOfTouchesRequired = 1
+        lbl.isUserInteractionEnabled = true
+        lbl.addGestureRecognizer(gesture)
         return lbl
     }()
     
@@ -189,5 +194,13 @@ class FeedCell: UICollectionViewCell {
     
     @objc func handleLikeTapped(){
         delegate?.handleLikeTapped(for: self)
+    }
+    
+    @objc func handleShowLikes(){
+        delegate?.handleShowLikes(for: self)
+    }
+    
+    func configureLikeButton(){
+        delegate?.handleConfigureLikeButton(for: self)
     }
 }
