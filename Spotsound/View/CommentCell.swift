@@ -26,7 +26,7 @@ class CommentCell: UICollectionViewCell {
             attributedText.append(NSAttributedString(string: " \(commentText)", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12)]))
             attributedText.append(NSAttributedString(string: " 2d", attributes: [
                 NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12), NSAttributedString.Key.foregroundColor : UIColor.lightGray]))
-            commentLabel.attributedText = attributedText
+            commentTextView.attributedText = attributedText
         }
     }
     
@@ -38,9 +38,11 @@ class CommentCell: UICollectionViewCell {
         return iv
     }()
     
-    let commentLabel: UILabel = {
-        let lbl = UILabel()
-        return lbl
+    let commentTextView: UITextView = {
+        let tv = UITextView()
+        tv.font = UIFont.systemFont(ofSize: 12)
+        tv.isScrollEnabled = false
+        return tv
     }()
     
     let separatorView: UIView = {
@@ -53,16 +55,15 @@ class CommentCell: UICollectionViewCell {
         super.init(frame: frame)
         
         self.addSubview(profileImageView)
-        profileImageView.anchor(top: nil, left: self.leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 8, paddingBottom: 0, paddingRight: 0, width: 48, height: 48)
+        profileImageView.anchor(top: nil, left: self.leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 8, paddingBottom: 0, paddingRight: 0, width: 40, height: 40)
         profileImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-        profileImageView.layer.cornerRadius = 48 / 2
+        profileImageView.layer.cornerRadius = 40 / 2
         
-        self.addSubview(commentLabel)
-        commentLabel.anchor(top: nil, left: profileImageView.rightAnchor, bottom: nil, right: self.rightAnchor, paddingTop: 0, paddingLeft: 8, paddingBottom: 0, paddingRight: 8, width: 0, height: 0)
-        commentLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        self.addSubview(commentTextView)
+        commentTextView.anchor(top: self.topAnchor, left: profileImageView.rightAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, paddingTop: 4, paddingLeft: 4, paddingBottom: 4, paddingRight: 4, width: 0, height: 0)
         
-        self.addSubview(separatorView)
-        separatorView.anchor(top: nil, left: self.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, paddingTop: 0, paddingLeft: 60, paddingBottom: 0, paddingRight: 0, width: 0, height: 0.5)
+//        self.addSubview(separatorView)
+//        separatorView.anchor(top: nil, left: self.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, paddingTop: 0, paddingLeft: 60, paddingBottom: 0, paddingRight: 0, width: 0, height: 0.5)
     }
     
     required init?(coder: NSCoder) {
