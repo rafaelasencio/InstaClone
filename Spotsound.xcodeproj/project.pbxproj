@@ -10,6 +10,7 @@
 		4FBD3138404015FFE586BAB0 /* Pods_Spotsound.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99BC0CE9D89A5761B6DF0653 /* Pods_Spotsound.framework */; };
 		732EE033244C9FCD00840A54 /* CommentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732EE032244C9FCD00840A54 /* CommentVC.swift */; };
 		732EE035244CA0A800840A54 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732EE034244CA0A800840A54 /* CommentCell.swift */; };
+		732EE037244CBE2400840A54 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732EE036244CBE2400840A54 /* Comment.swift */; };
 		7362C698244692780022BC5A /* SelectImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7362C697244692780022BC5A /* SelectImageVC.swift */; };
 		7362C69A244693310022BC5A /* SelectPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7362C699244693310022BC5A /* SelectPhotoCell.swift */; };
 		7362C69C2446936F0022BC5A /* SelectPhotoHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7362C69B2446936F0022BC5A /* SelectPhotoHeader.swift */; };
@@ -47,6 +48,7 @@
 		4A24B677765020F039AB40E2 /* Pods-Spotsound.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spotsound.release.xcconfig"; path = "Target Support Files/Pods-Spotsound/Pods-Spotsound.release.xcconfig"; sourceTree = "<group>"; };
 		732EE032244C9FCD00840A54 /* CommentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentVC.swift; sourceTree = "<group>"; };
 		732EE034244CA0A800840A54 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
+		732EE036244CBE2400840A54 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		7362C697244692780022BC5A /* SelectImageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectImageVC.swift; sourceTree = "<group>"; };
 		7362C699244693310022BC5A /* SelectPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPhotoCell.swift; sourceTree = "<group>"; };
 		7362C69B2446936F0022BC5A /* SelectPhotoHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPhotoHeader.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 			children = (
 				7364E4652443EB3F00A7376A /* User.swift */,
 				739B8D7F2448AC6000F35C3E /* Post.swift */,
+				732EE036244CBE2400840A54 /* Comment.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -401,6 +404,7 @@
 				7364E45124439B4300A7376A /* MainTabVC.swift in Sources */,
 				732EE035244CA0A800840A54 /* CommentCell.swift in Sources */,
 				7364E4332442908A00A7376A /* SceneDelegate.swift in Sources */,
+				732EE037244CBE2400840A54 /* Comment.swift in Sources */,
 				7364E4722445DA8F00A7376A /* FollowLikeVC.swift in Sources */,
 				7364E45B2443AC4F00A7376A /* UserProfileVC.swift in Sources */,
 				732EE033244C9FCD00840A54 /* CommentVC.swift in Sources */,
