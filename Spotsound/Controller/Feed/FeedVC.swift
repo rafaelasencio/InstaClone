@@ -108,17 +108,20 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
         print("options")
     }
     
-    func handleLikeTapped(for cell: FeedCell) {
+    func handleLikeTapped(for cell: FeedCell, isDoubleTap: Bool) {
         
         guard let post = cell.post else {return}
         
         if post.didLike {
-            post.adjustLikes(addLike: false) { (likes) in
-                cell.likesLabel.text = "\(likes) likes"
-                cell.likeButton.setImage(#imageLiteral(resourceName: "like_unselected"), for: .normal)
+            // handle unlike post
+            if !isDoubleTap {
+                post.adjustLikes(addLike: false) { (likes) in
+                    cell.likesLabel.text = "\(likes) likes"
+                    cell.likeButton.setImage(#imageLiteral(resourceName: "like_unselected"), for: .normal)
+                }
             }
-           
         } else {
+            // handle like post
             post.adjustLikes(addLike: true) { (likes) in
                 cell.likesLabel.text = "\(likes) likes"
                 cell.likeButton.setImage(#imageLiteral(resourceName: "like_selected"), for: .normal)
@@ -144,8 +147,9 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
         guard let currentUserUid = Auth.auth().currentUser?.uid else {return}
         
         USER_LIKES_REF.child(currentUserUid).observe(.value) { (snapshot) in
+            
+            // check if post id exists in user-likes structure
             if snapshot.hasChild(postId) {
-                
                 post.didLike = true
                 cell.likeButton.setImage(#imageLiteral(resourceName: "like_selected"), for: .normal)
             } else {
@@ -157,7 +161,8 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
     
     
     func handleCommentTapped(for cell: FeedCell) {
-        print("comment")
+        let commentVC = CommentVC(collectionViewLayout: UICollectionViewFlowLayout())
+        self.navigationController?.pushViewController(commentVC, animated: true)
     }
     
     //MARK: - Handlers

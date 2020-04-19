@@ -41,11 +41,10 @@ class FollowLikeVC: UITableViewController {
         //register cell
         tableView.register(FollowLikeCell.self, forCellReuseIdentifier: reuseIdentifier)
         
-        //configure nav controller and fetch users
-        if let viewingMode = self.viewingMode {
-            configureNavTitle(for: viewingMode)
-            fetchUsers(by: viewingMode)
-        }
+        // configure nav controller
+        configureNavTitle()
+        // fetch users
+        fetchUsers()
         tableView.separatorColor = .clear
         
     }
@@ -80,7 +79,10 @@ class FollowLikeVC: UITableViewController {
     
     //MARK: - Handlers
     
-    func configureNavTitle(for viewingMode: ViewingMode) {
+    func configureNavTitle() {
+        
+        guard let viewingMode = self.viewingMode else {return}
+        
         switch viewingMode {
             case .Followers: self.navigationItem.title = "Followers"
             case .Following: self.navigationItem.title = "Following"
@@ -92,7 +94,7 @@ class FollowLikeVC: UITableViewController {
     
     func getDatabaseReference() -> DatabaseReference? {
         
-        guard let viewingMode = viewingMode else {return nil}
+        guard let viewingMode = self.viewingMode else {return nil}
         
         switch viewingMode {
             case .Followers: return USER_FOLLOWER_REF
@@ -101,8 +103,17 @@ class FollowLikeVC: UITableViewController {
         }
         
     }
-    func fetchUsers(by viewingMode: ViewingMode){
+    
+    func fetchUser(with uid: String){
         
+        Database.fetchUser(with: uid) { (user) in
+            self.users.append(user)
+            self.tableView.reloadData()
+        }
+    }
+    
+    func fetchUsers(){
+        guard let viewingMode = self.viewingMode else {return }
         guard let ref = getDatabaseReference() else {return}
         
         switch viewingMode {
@@ -115,14 +126,8 @@ class FollowLikeVC: UITableViewController {
                     
                     guard let allObjects = snapshot.children.allObjects as? [DataSnapshot] else {return}
                     allObjects.forEach { (snapshot) in
-                        
-                        let userId = snapshot.key
-                        
-                        Database.fetchUser(with: userId) { (user) in
-                            
-                            self.users.append(user)
-                            self.tableView.reloadData()
-                        }
+                        let uid = snapshot.key
+                        self.fetchUser(with: uid)
                     }
                 }
             
@@ -131,11 +136,7 @@ class FollowLikeVC: UITableViewController {
                 guard let postId = self.postId else {return}
                 ref.child(postId).observe(.childAdded) { (snapshot) in
                     let uid = snapshot.key
-                    Database.fetchUser(with: uid) { (user) in
-                        self.users.append(user)
-                        self.tableView.reloadData()
-                    }
-                    
+                    self.fetchUser(with: uid)
             }
         }
         
