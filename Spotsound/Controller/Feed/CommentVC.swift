@@ -27,8 +27,8 @@ class CommentVC: UICollectionViewController,UICollectionViewDelegateFlowLayout {
         postButton.anchor(top: nil, left: nil, bottom: nil, right: containerView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 8, width: 50, height: 0)
         postButton.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
 
-        containerView.addSubview(commentTextView)
-        commentTextView.anchor(top: containerView.topAnchor, left: containerView.leftAnchor, bottom: containerView.bottomAnchor, right: postButton.leftAnchor, paddingTop: 0, paddingLeft: 8, paddingBottom: 0, paddingRight: 8, width: 0, height: 0)
+        containerView.addSubview(commentTextField)
+        commentTextField.anchor(top: containerView.topAnchor, left: containerView.leftAnchor, bottom: containerView.bottomAnchor, right: postButton.leftAnchor, paddingTop: 0, paddingLeft: 8, paddingBottom: 0, paddingRight: 8, width: 0, height: 0)
         
         let dividerView = UIView()
         dividerView.backgroundColor = UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1)
@@ -38,7 +38,7 @@ class CommentVC: UICollectionViewController,UICollectionViewDelegateFlowLayout {
         return containerView
     }()
     
-    let commentTextView: UITextField = {
+    let commentTextField: UITextField = {
         let tf = UITextField()
         tf.placeholder = "Enter comment.."
         tf.font = UIFont.systemFont(ofSize: 14)
@@ -65,6 +65,9 @@ class CommentVC: UICollectionViewController,UICollectionViewDelegateFlowLayout {
         
         //register cell
         self.collectionView.register(CommentCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        
+        //fetch comments
+        fetchComments()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -104,6 +107,7 @@ class CommentVC: UICollectionViewController,UICollectionViewDelegateFlowLayout {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CommentCell
+        cell.comment = comments[indexPath.item]
         return cell
     }
     
@@ -112,13 +116,35 @@ class CommentVC: UICollectionViewController,UICollectionViewDelegateFlowLayout {
     @objc func handleUploadComment(){
         print("handle comments")
         guard let postId = self.postId else {return}
-        guard let commentText = commentTextView.text else {return}
+        guard let commentText = commentTextField.text else {return}
         guard let uid = Auth.auth().currentUser?.uid else {return}
         let creationDate = Int(NSDate().timeIntervalSince1970)
         let values = [
             "commentText":commentText,
             "creationDate":creationDate,
             "uid":uid] as [String:Any]
-        COMMENT_REF.child(postId).childByAutoId().updateChildValues(values)
+        COMMENT_REF.child(postId).childByAutoId().updateChildValues(values) { (error, ref) in
+            // clean textfield after upload post
+            self.commentTextField.text = nil
+        }
+    }
+    
+    func fetchComments(){
+        guard let postId = self.postId else {return}
+        
+        COMMENT_REF.child(postId).observe(.childAdded) { (snapshot) in
+            
+            guard let dictionary = snapshot.value as? Dictionary<String, AnyObject> else {return}
+            
+            guard let uid = dictionary["uid"] as? String else {return}
+            
+            Database.fetchUser(with: uid) { (user) in
+                
+                let comment = Comment(user: user, dictionary: dictionary)
+                self.comments.append(comment)
+                self.collectionView.reloadData()
+            }
+            
+        }
     }
 }

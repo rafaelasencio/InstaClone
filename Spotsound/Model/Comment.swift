@@ -16,12 +16,12 @@ class Comment {
     var creationDate: Date!
     var user: User?
     
-    init(dictionary: Dictionary <String, AnyObject>) {
+    init(user: User, dictionary: Dictionary <String, AnyObject>) {
+        
+        self.user = user
         
         if let uid = dictionary["uid"] as? String {
-            Database.fetchUser(with: uid) { (user) in
-                self.user = user
-            }
+            self.uid = uid
         }
         
         if let commentText = dictionary["commentText"] as? String {
