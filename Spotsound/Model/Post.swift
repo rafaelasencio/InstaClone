@@ -57,6 +57,9 @@ class Post {
             //update user-likes structure
             USER_LIKES_REF.child(currentUserUid).updateChildValues([postId : 1]) { (error, ref) in
                 
+                // send notification to server
+                self.sendLikeNotificationToServer()
+                
                 //update post-likes structure
                 POST_LIKES_REF.child(self.postId).updateChildValues([currentUserUid : 1]) { (err, ref) in
 
@@ -70,24 +73,61 @@ class Post {
             
             
         } else {
-            // remove like from user-likes structure
-            USER_LIKES_REF.child(currentUserUid).child(postId).removeValue { (err, ref) in
+            
+            //observe db for notification id to remove
+            USER_LIKES_REF.child(currentUserUid).child(postId).observeSingleEvent(of: .value) { (snapshot) in
                 
-                // remove like post-likes structure
-                POST_LIKES_REF.child(self.postId).child(currentUserUid).removeValue { (err, ref) in
+                //notification id to remove from server
+                guard let notificationId = snapshot.value as? String else {return}
+                
+                NOTIFICATIONS_REF.child(self.ownerId).child(notificationId).removeValue { (err, ref) in
                     
-                    //set when finish updating in DB
-                    guard self.likes > 0 else {return}
-                    self.likes = self.likes - 1
-                    self.didLike = false
-                    completion(self.likes)
-                    POSTS_REF.child(self.postId).child("likes").setValue(self.likes)
+                    // remove like from user-likes structure
+                    USER_LIKES_REF.child(currentUserUid).child(postId).removeValue { (err, ref) in
+                        
+                        // remove like post-likes structure
+                        POST_LIKES_REF.child(self.postId).child(currentUserUid).removeValue { (err, ref) in
+                            
+                            //set when finish updating in DB
+                            guard self.likes > 0 else {return}
+                            self.likes = self.likes - 1
+                            self.didLike = false
+                            completion(self.likes)
+                            POSTS_REF.child(self.postId).child("likes").setValue(self.likes)
+                        }
+                    }
                 }
             }
-            
         }
+    }
+    
+    
+    func sendLikeNotificationToServer(){
+        
+        // properties
+        guard let currentUserUid = Auth.auth().currentUser?.uid else {return}
+        let creationDate = Int(NSDate().timeIntervalSince1970)
         
         
+        // only send notification when user who liked it is not current user
+        if currentUserUid != self.ownerId {
+            
+            // notification values
+            let values = [
+                "check": 0,
+                "creationDate":creationDate,
+                "uid": currentUserUid,
+                "type": LIKE_INT_VALUE,
+                "postId":postId] as [ String : Any ]
+            
+            // notification db reference
+            let notificationRef = NOTIFICATIONS_REF.child(self.ownerId).childByAutoId()
+            
+            // upload notification values to db
+            notificationRef.updateChildValues(values) { (err, ref) in
+                USER_LIKES_REF.child(currentUserUid).child(self.postId).setValue(notificationRef.key)
+            }
+        }
     }
 }
 
