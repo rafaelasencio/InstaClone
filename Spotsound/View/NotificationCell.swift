@@ -12,6 +12,7 @@ class NotificationCell: UITableViewCell {
 
     
     //MARK: - Properties
+    var delegate: NotificationCellDelegate!
     
     var notification: Notification? {
         
@@ -57,11 +58,15 @@ class NotificationCell: UITableViewCell {
         return btn
     }()
     
-    let postImageView: CustomImageView = {
+    lazy var postImageView: CustomImageView = {
        let iv = CustomImageView()
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         iv.backgroundColor = .lightGray
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(handlePostTapped))
+        gesture.numberOfTouchesRequired = 1
+        iv.isUserInteractionEnabled = true
+        iv.addGestureRecognizer(gesture)
         return iv
     }()
     
@@ -69,7 +74,11 @@ class NotificationCell: UITableViewCell {
     // MARK: - Handlers
     
     @objc func handleFollowTapped(){
-        print("handleFollowTapped")
+        delegate.handleFollowTapped(for: self)
+    }
+    
+    @objc func handlePostTapped(){
+        delegate.handlePostTapped(for: self)
     }
     
     func configureNotificationLabel(){
@@ -80,7 +89,7 @@ class NotificationCell: UITableViewCell {
         let notificationMessage = notification.notificationType.description
         
         let attributedText = NSMutableAttributedString(string: username, attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 12)])
-        attributedText.append(NSAttributedString(string: notificationMessage, attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12)]))
+        attributedText.append(NSAttributedString(string: " " + notificationMessage, attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12)]))
         attributedText.append(NSAttributedString(string: " 2d", attributes: [
         NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12), NSAttributedString.Key.foregroundColor : UIColor.lightGray]))
         notificationLabel.attributedText = attributedText
@@ -109,6 +118,23 @@ class NotificationCell: UITableViewCell {
             followButton.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
             followButton.layer.cornerRadius = 3
             anchor = followButton.leftAnchor
+            
+            user.checkIfUserIsFollowed { (followed) in
+                if followed {
+                    //confg follow button for followed user
+                    self.followButton.setTitle("Following", for: .normal)
+                    self.followButton.setTitleColor(.black, for: .normal)
+                    self.followButton.layer.borderColor = UIColor.lightGray.cgColor
+                    self.followButton.layer.borderWidth = 0.5
+                    self.followButton.backgroundColor = .white
+                } else {
+                    //confg follow button for non followed user
+                    self.followButton.setTitle("Follow", for: .normal)
+                    self.followButton.setTitleColor(.white, for: .normal)
+                    self.followButton.layer.borderWidth = 0
+                    self.followButton.backgroundColor = UIColor(red: 17/255, green: 154/255, blue: 237/255, alpha: 1)
+                }
+            }
         }
         
         self.addSubview(notificationLabel)
