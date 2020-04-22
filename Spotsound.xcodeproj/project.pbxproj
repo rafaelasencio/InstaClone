@@ -19,6 +19,8 @@
 		7362C69C2446936F0022BC5A /* SelectPhotoHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7362C69B2446936F0022BC5A /* SelectPhotoHeader.swift */; };
 		73646E2924509A6F0055DD49 /* MessagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73646E2824509A6F0055DD49 /* MessagesController.swift */; };
 		73646E2B24509D1D0055DD49 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73646E2A24509D1D0055DD49 /* MessageCell.swift */; };
+		73646E2D2450A6A90055DD49 /* NewMessagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73646E2C2450A6A90055DD49 /* NewMessagesController.swift */; };
+		73646E2F2450A7580055DD49 /* NewMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73646E2E2450A7580055DD49 /* NewMessageCell.swift */; };
 		7364E4312442908A00A7376A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7364E4302442908A00A7376A /* AppDelegate.swift */; };
 		7364E4332442908A00A7376A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7364E4322442908A00A7376A /* SceneDelegate.swift */; };
 		7364E4352442908A00A7376A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7364E4342442908A00A7376A /* ViewController.swift */; };
@@ -62,6 +64,8 @@
 		7362C69B2446936F0022BC5A /* SelectPhotoHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPhotoHeader.swift; sourceTree = "<group>"; };
 		73646E2824509A6F0055DD49 /* MessagesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesController.swift; sourceTree = "<group>"; };
 		73646E2A24509D1D0055DD49 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
+		73646E2C2450A6A90055DD49 /* NewMessagesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessagesController.swift; sourceTree = "<group>"; };
+		73646E2E2450A7580055DD49 /* NewMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageCell.swift; sourceTree = "<group>"; };
 		7364E42D2442908A00A7376A /* Spotsound.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spotsound.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7364E4302442908A00A7376A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7364E4322442908A00A7376A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -129,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				73646E2824509A6F0055DD49 /* MessagesController.swift */,
+				73646E2C2450A6A90055DD49 /* NewMessagesController.swift */,
 			);
 			path = Messages;
 			sourceTree = "<group>";
@@ -195,6 +200,7 @@
 				732EE038244D152400840A54 /* NotificationCell.swift */,
 				7328FB762450541E006BB919 /* SearchPostCell.swift */,
 				73646E2A24509D1D0055DD49 /* MessageCell.swift */,
+				73646E2E2450A7580055DD49 /* NewMessageCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -414,6 +420,7 @@
 				739B8D8424492D3400F35C3E /* FeedCell.swift in Sources */,
 				739B8D8224490ABA00F35C3E /* UserPostCell.swift in Sources */,
 				7364E4682443FCD500A7376A /* SearchUserCell.swift in Sources */,
+				73646E2D2450A6A90055DD49 /* NewMessagesController.swift in Sources */,
 				739B8D802448AC6000F35C3E /* Post.swift in Sources */,
 				7364E4552443ABBB00A7376A /* SearchVC.swift in Sources */,
 				7362C698244692780022BC5A /* SelectImageVC.swift in Sources */,
@@ -422,6 +429,7 @@
 				732EE039244D152400840A54 /* NotificationCell.swift in Sources */,
 				7364E4742445DB3300A7376A /* FollowLikeCell.swift in Sources */,
 				7364E4482442911B00A7376A /* LoginVC.swift in Sources */,
+				73646E2F2450A7580055DD49 /* NewMessageCell.swift in Sources */,
 				7364E46E2444D8BC00A7376A /* EditProfileController.swift in Sources */,
 				732EE03B244DE07200840A54 /* Notification.swift in Sources */,
 				7328FB772450541E006BB919 /* SearchPostCell.swift in Sources */,
