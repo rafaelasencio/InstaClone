@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4FBD3138404015FFE586BAB0 /* Pods_Spotsound.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99BC0CE9D89A5761B6DF0653 /* Pods_Spotsound.framework */; };
+		7328FB772450541E006BB919 /* SearchPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7328FB762450541E006BB919 /* SearchPostCell.swift */; };
 		732EE033244C9FCD00840A54 /* CommentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732EE032244C9FCD00840A54 /* CommentVC.swift */; };
 		732EE035244CA0A800840A54 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732EE034244CA0A800840A54 /* CommentCell.swift */; };
 		732EE037244CBE2400840A54 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732EE036244CBE2400840A54 /* Comment.swift */; };
@@ -48,6 +49,7 @@
 
 /* Begin PBXFileReference section */
 		4A24B677765020F039AB40E2 /* Pods-Spotsound.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spotsound.release.xcconfig"; path = "Target Support Files/Pods-Spotsound/Pods-Spotsound.release.xcconfig"; sourceTree = "<group>"; };
+		7328FB762450541E006BB919 /* SearchPostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPostCell.swift; sourceTree = "<group>"; };
 		732EE032244C9FCD00840A54 /* CommentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentVC.swift; sourceTree = "<group>"; };
 		732EE034244CA0A800840A54 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		732EE036244CBE2400840A54 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 				739B8D8324492D3400F35C3E /* FeedCell.swift */,
 				732EE034244CA0A800840A54 /* CommentCell.swift */,
 				732EE038244D152400840A54 /* NotificationCell.swift */,
+				7328FB762450541E006BB919 /* SearchPostCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -406,6 +409,7 @@
 				7364E4482442911B00A7376A /* LoginVC.swift in Sources */,
 				7364E46E2444D8BC00A7376A /* EditProfileController.swift in Sources */,
 				732EE03B244DE07200840A54 /* Notification.swift in Sources */,
+				7328FB772450541E006BB919 /* SearchPostCell.swift in Sources */,
 				7364E4702444DB4D00A7376A /* CustomImageView.swift in Sources */,
 				7364E45324439ED200A7376A /* FeedVC.swift in Sources */,
 				7364E44D2442AB3100A7376A /* SignUpVC.swift in Sources */,
