@@ -168,6 +168,7 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
     }
     
     //MARK: - Handlers
+    
     @objc func handleRefresh(){
         posts.removeAll(keepingCapacity: false)
         fetchPost()
@@ -175,7 +176,8 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
     }
     
     @objc func handleShowMessages() {
-        print("handle show message")
+        let messagesController = MessagesController()
+        self.navigationController?.pushViewController(messagesController, animated: true)
     }
     
     @objc func handleLogout(){

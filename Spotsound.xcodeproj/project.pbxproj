@@ -17,6 +17,8 @@
 		7362C698244692780022BC5A /* SelectImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7362C697244692780022BC5A /* SelectImageVC.swift */; };
 		7362C69A244693310022BC5A /* SelectPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7362C699244693310022BC5A /* SelectPhotoCell.swift */; };
 		7362C69C2446936F0022BC5A /* SelectPhotoHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7362C69B2446936F0022BC5A /* SelectPhotoHeader.swift */; };
+		73646E2924509A6F0055DD49 /* MessagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73646E2824509A6F0055DD49 /* MessagesController.swift */; };
+		73646E2B24509D1D0055DD49 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73646E2A24509D1D0055DD49 /* MessageCell.swift */; };
 		7364E4312442908A00A7376A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7364E4302442908A00A7376A /* AppDelegate.swift */; };
 		7364E4332442908A00A7376A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7364E4322442908A00A7376A /* SceneDelegate.swift */; };
 		7364E4352442908A00A7376A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7364E4342442908A00A7376A /* ViewController.swift */; };
@@ -58,6 +60,8 @@
 		7362C697244692780022BC5A /* SelectImageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectImageVC.swift; sourceTree = "<group>"; };
 		7362C699244693310022BC5A /* SelectPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPhotoCell.swift; sourceTree = "<group>"; };
 		7362C69B2446936F0022BC5A /* SelectPhotoHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPhotoHeader.swift; sourceTree = "<group>"; };
+		73646E2824509A6F0055DD49 /* MessagesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesController.swift; sourceTree = "<group>"; };
+		73646E2A24509D1D0055DD49 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		7364E42D2442908A00A7376A /* Spotsound.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spotsound.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7364E4302442908A00A7376A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7364E4322442908A00A7376A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -121,6 +125,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		73646E272450995B0055DD49 /* Messages */ = {
+			isa = PBXGroup;
+			children = (
+				73646E2824509A6F0055DD49 /* MessagesController.swift */,
+			);
+			path = Messages;
+			sourceTree = "<group>";
+		};
 		7364E4242442908A00A7376A = {
 			isa = PBXGroup;
 			children = (
@@ -182,6 +194,7 @@
 				732EE034244CA0A800840A54 /* CommentCell.swift */,
 				732EE038244D152400840A54 /* NotificationCell.swift */,
 				7328FB762450541E006BB919 /* SearchPostCell.swift */,
+				73646E2A24509D1D0055DD49 /* MessageCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -196,6 +209,7 @@
 				7364E4622443CF3900A7376A /* UploadPost */,
 				7364E45F2443CEF600A7376A /* UserProfile */,
 				7364E45E2443CEE500A7376A /* Notifications */,
+				73646E272450995B0055DD49 /* Messages */,
 				7364E45024439B4300A7376A /* MainTabVC.swift */,
 			);
 			path = Controller;
@@ -392,6 +406,7 @@
 				7364E46C2444CC7700A7376A /* Constants.swift in Sources */,
 				7364E44B2442955500A7376A /* Extensions.swift in Sources */,
 				7364E4572443AC0E00A7376A /* UploadPostVC.swift in Sources */,
+				73646E2B24509D1D0055DD49 /* MessageCell.swift in Sources */,
 				7362C69A244693310022BC5A /* SelectPhotoCell.swift in Sources */,
 				7362C69C2446936F0022BC5A /* SelectPhotoHeader.swift in Sources */,
 				7364E4352442908A00A7376A /* ViewController.swift in Sources */,
@@ -417,6 +432,7 @@
 				732EE035244CA0A800840A54 /* CommentCell.swift in Sources */,
 				7364E4332442908A00A7376A /* SceneDelegate.swift in Sources */,
 				732EE037244CBE2400840A54 /* Comment.swift in Sources */,
+				73646E2924509A6F0055DD49 /* MessagesController.swift in Sources */,
 				7364E4722445DA8F00A7376A /* FollowLikeVC.swift in Sources */,
 				7364E45B2443AC4F00A7376A /* UserProfileVC.swift in Sources */,
 				732EE033244C9FCD00840A54 /* CommentVC.swift in Sources */,
