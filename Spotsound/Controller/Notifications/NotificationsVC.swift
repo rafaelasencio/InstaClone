@@ -16,6 +16,7 @@ class NotificationsVC: UITableViewController {
 
     //MARK: - Properties
     var notifications = [Notification]()
+    var timer: Timer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,6 +56,22 @@ class NotificationsVC: UITableViewController {
         self.navigationController?.pushViewController(userProfileVC, animated: true)
     }
     
+    //MARK_ - Handlers
+    
+    func handleReloadTable(){
+        self.timer?.invalidate()
+        
+        self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(handleSortNotifications), userInfo: nil, repeats: false)
+    }
+    
+    @objc func handleSortNotifications(){
+
+        self.notifications.sort(by: {$0.creationDate > $1.creationDate})
+        self.tableView.reloadData()
+    }
+    
+    
+    //MARK: - Api
     
     func fetchNotification(){
         
@@ -63,8 +80,10 @@ class NotificationsVC: UITableViewController {
         // .childAdded go through each notification
         NOTIFICATIONS_REF.child(currentUserUid).observe(.childAdded) { (snapshot) in
             
+            let notificationId = snapshot.key
             guard let dictionary = snapshot.value as? Dictionary <String, AnyObject> else {return}
             guard let uid = dictionary["uid"] as? String else {return}
+            
             
             Database.fetchUser(with: uid) { (user) in
                 
@@ -74,16 +93,17 @@ class NotificationsVC: UITableViewController {
                     Database.fetchPost(with: postId) { (post) in
                         let notification = Notification(user: user, post: post, dictionary: dictionary)
                         self.notifications.append(notification)
-                        self.tableView.reloadData()
+                        self.handleReloadTable()
                     }
                 } else {
                     
                     let notification = Notification(user: user, dictionary: dictionary)
                     self.notifications.append(notification)
-                    self.tableView.reloadData()
+                    self.handleReloadTable()
                 }
             }
             
+            NOTIFICATIONS_REF.child(currentUserUid).child(notificationId).child("check").setValue(1)
         }
     }
     
@@ -95,19 +115,15 @@ extension NotificationsVC: NotificationCellDelegate {
     //MARK: - NotificationCellDelegate
     func handleFollowTapped(for cell: NotificationCell) {
         guard let user = cell.notification?.user else { return }
+        
         if user.isFollowed {
+            // handle unfollow user
             user.unfollow()
-            cell.followButton.setTitle("Follow", for: .normal)
-            cell.followButton.setTitleColor(.white, for: .normal)
-            cell.followButton.layer.borderWidth = 0
-            cell.followButton.backgroundColor = UIColor(red: 17/255, green: 154/255, blue: 237/255, alpha: 1)
+            cell.followButton.configure(didFollow: false)
         } else {
+            // handle follow user
             user.follow()
-            cell.followButton.setTitle("Following", for: .normal)
-            cell.followButton.setTitleColor(.black, for: .normal)
-            cell.followButton.layer.borderColor = UIColor.lightGray.cgColor
-            cell.followButton.layer.borderWidth = 0.5
-            cell.followButton.backgroundColor = .white
+            cell.followButton.configure(didFollow: true )
         }
     }
     
