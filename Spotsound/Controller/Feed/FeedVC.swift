@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import ActiveLabel
 
 private let identifier = "cellId"
 
@@ -78,7 +79,7 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
             cell.post = posts[indexPath.row]
         }
         
-        
+        handleHastagTapped(forCell: cell)
         return cell
     }
     
@@ -168,6 +169,12 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
     }
     
     //MARK: - Handlers
+    
+    func handleHastagTapped(forCell cell: FeedCell){
+        cell.captionLabel.handleHashtagTap { (hashtag) in
+            print("hashtag is \(hashtag)")
+        }
+    }
     
     @objc func handleRefresh(){
         posts.removeAll(keepingCapacity: false)

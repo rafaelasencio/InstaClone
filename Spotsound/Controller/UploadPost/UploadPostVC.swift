@@ -117,6 +117,9 @@ class UploadPostVC: UIViewController, UITextViewDelegate {
                     //update user-feed structure
                     self.updateUserFeeds(with: postKey)
                     
+                    // upload hashtag to server
+                    self.uploadHastagToServer(forPostId: postKey)
+                    
                     // return to home feed
                     self.dismiss(animated: true) {
                         self.tabBarController?.selectedIndex = 0
@@ -159,6 +162,23 @@ class UploadPostVC: UIViewController, UITextViewDelegate {
         //update current user feed
         USER_FEED_REF.child(currentUid).updateChildValues(values)
         
+    }
+    
+    //MARK: - Api
+    
+    func uploadHastagToServer(forPostId postId: String){
+        guard let caption = captionTextView.text else { return }
+        let words: [String] = caption.components(separatedBy: .whitespacesAndNewlines)
+        
+        for var word in words {
+            if word.hasPrefix("#"){
+                word = word.trimmingCharacters(in: .punctuationCharacters)
+                word = word.trimmingCharacters(in: .symbols)
+                
+                let hashtagValues = [postId: 1]
+                HASHTAG_POST_REF.child(word.lowercased()).updateChildValues(hashtagValues)
+            }
+        }
     }
 
 }
