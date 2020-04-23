@@ -24,6 +24,8 @@
 		73646E312450FA090055DD49 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73646E302450FA090055DD49 /* Message.swift */; };
 		73646E332450FD810055DD49 /* ChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73646E322450FD810055DD49 /* ChatController.swift */; };
 		73646E352450FEC90055DD49 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73646E342450FEC90055DD49 /* ChatCell.swift */; };
+		73646E39245258050055DD49 /* HashtagController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73646E38245258050055DD49 /* HashtagController.swift */; };
+		73646E3B24525A230055DD49 /* HashtagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73646E3A24525A230055DD49 /* HashtagCell.swift */; };
 		7364E4312442908A00A7376A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7364E4302442908A00A7376A /* AppDelegate.swift */; };
 		7364E4332442908A00A7376A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7364E4322442908A00A7376A /* SceneDelegate.swift */; };
 		7364E4352442908A00A7376A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7364E4342442908A00A7376A /* ViewController.swift */; };
@@ -72,6 +74,8 @@
 		73646E302450FA090055DD49 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		73646E322450FD810055DD49 /* ChatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatController.swift; sourceTree = "<group>"; };
 		73646E342450FEC90055DD49 /* ChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
+		73646E38245258050055DD49 /* HashtagController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashtagController.swift; sourceTree = "<group>"; };
+		73646E3A24525A230055DD49 /* HashtagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashtagCell.swift; sourceTree = "<group>"; };
 		7364E42D2442908A00A7376A /* Spotsound.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spotsound.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7364E4302442908A00A7376A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7364E4322442908A00A7376A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -158,6 +162,7 @@
 				732EE034244CA0A800840A54 /* CommentCell.swift */,
 				732EE038244D152400840A54 /* NotificationCell.swift */,
 				7328FB762450541E006BB919 /* SearchPostCell.swift */,
+				73646E3A24525A230055DD49 /* HashtagCell.swift */,
 			);
 			path = Social;
 			sourceTree = "<group>";
@@ -304,6 +309,7 @@
 			children = (
 				7364E45224439ED200A7376A /* FeedVC.swift */,
 				732EE032244C9FCD00840A54 /* CommentVC.swift */,
+				73646E38245258050055DD49 /* HashtagController.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -453,6 +459,7 @@
 				7364E4662443EB3F00A7376A /* User.swift in Sources */,
 				7364E4592443AC4100A7376A /* NotificationsVC.swift in Sources */,
 				732EE039244D152400840A54 /* NotificationCell.swift in Sources */,
+				73646E3B24525A230055DD49 /* HashtagCell.swift in Sources */,
 				73646E332450FD810055DD49 /* ChatController.swift in Sources */,
 				7364E4742445DB3300A7376A /* FollowLikeCell.swift in Sources */,
 				7364E4482442911B00A7376A /* LoginVC.swift in Sources */,
@@ -468,6 +475,7 @@
 				7364E4332442908A00A7376A /* SceneDelegate.swift in Sources */,
 				73646E352450FEC90055DD49 /* ChatCell.swift in Sources */,
 				732EE037244CBE2400840A54 /* Comment.swift in Sources */,
+				73646E39245258050055DD49 /* HashtagController.swift in Sources */,
 				73646E2924509A6F0055DD49 /* MessagesController.swift in Sources */,
 				7364E4722445DA8F00A7376A /* FollowLikeVC.swift in Sources */,
 				7364E45B2443AC4F00A7376A /* UserProfileVC.swift in Sources */,
