@@ -38,6 +38,9 @@ let COMMENT_REF = DB_REF.child("comments")
 
 let NOTIFICATIONS_REF = DB_REF.child("notifications")
 
+let MESSAGES_REF = DB_REF.child("messages")
+let USER_MESSAGES_REF = DB_REF.child("user-messages")
+
 let LIKE_INT_VALUE = 0
 let COMMENT_INT_VALUE = 1
 let FOLLOW_INT_VALIE = 2
