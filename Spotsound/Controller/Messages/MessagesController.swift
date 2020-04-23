@@ -17,7 +17,7 @@ class MessagesController: UITableViewController {
     //MARK: - Properties
 
     var messages = [Message]()
-
+    var messagesDictionary = [String: Message]()
     
     //MARK: - Init
     override func viewDidLoad() {
@@ -51,7 +51,11 @@ class MessagesController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("selected row")
+        let mesagge = messages[indexPath.row]
+        guard let chatPartnerId = mesagge.getChatPartnerId() else { return }
+        Database.fetchUser(with: chatPartnerId) { (user) in
+            self.showChatController(for: user)
+        }
     }
     
     
@@ -82,6 +86,10 @@ class MessagesController: UITableViewController {
         
         guard let currentUserUid = Auth.auth().currentUser?.uid else { return }
         
+        self.messages.removeAll()
+        self.messagesDictionary.removeAll()
+        self.tableView.reloadData()
+        
         USER_MESSAGES_REF.child(currentUserUid).observe(.childAdded) { (snapshot) in
             let uid = snapshot.key
             
@@ -99,7 +107,11 @@ class MessagesController: UITableViewController {
             
             guard let dictionary = snapshot.value as? Dictionary<String, AnyObject> else { return }
             let message = Message(dictionary: dictionary)
-            self.messages.append(message)
+            // represent key for each set of messages
+            guard let chatPartnerId = message.getChatPartnerId() else { return }
+            self.messagesDictionary[chatPartnerId] = message
+            self.messages = Array(self.messagesDictionary.values)
+//            self.messages.append(message)
             self.tableView.reloadData()
         }
     }
