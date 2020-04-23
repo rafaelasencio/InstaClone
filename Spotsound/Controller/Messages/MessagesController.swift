@@ -28,6 +28,9 @@ class MessagesController: UITableViewController {
         
         // register cell
         tableView.register(MessageCell.self, forCellReuseIdentifier: reuseIdentifier)
+        
+        //fetch messages
+        fetchMessage()
     }
     
     //MARK: - UITableView
@@ -43,6 +46,7 @@ class MessagesController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! MessageCell
+        cell.message = messages[indexPath.row]
         return cell
     }
     
@@ -71,4 +75,33 @@ class MessagesController: UITableViewController {
         navigationItem.title = "Messages"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(handleNewMessage))
     }
+    
+    //MARK: - Api
+    
+    func fetchMessage(){
+        
+        guard let currentUserUid = Auth.auth().currentUser?.uid else { return }
+        
+        USER_MESSAGES_REF.child(currentUserUid).observe(.childAdded) { (snapshot) in
+            let uid = snapshot.key
+            
+            USER_MESSAGES_REF.child(currentUserUid).child(uid).observe(.childAdded) { (snapshot) in
+                
+                let messageId = snapshot.key
+                self.fetchMessage(withMessageId: messageId)
+            }
+        }
+    }
+    
+    func fetchMessage(withMessageId messageId: String){
+        
+        MESSAGES_REF.child(messageId).observeSingleEvent(of: .value) { (snapshot) in
+            
+            guard let dictionary = snapshot.value as? Dictionary<String, AnyObject> else { return }
+            let message = Message(dictionary: dictionary)
+            self.messages.append(message)
+            self.tableView.reloadData()
+        }
+    }
+    
 }
