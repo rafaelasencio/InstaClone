@@ -112,6 +112,9 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ChatCell
+        let message = messages[indexPath.item]
+        cell.message = message
+        configureMessage(cell: cell, message: message)
         return cell
     }
     
@@ -125,7 +128,9 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     @objc func handleInfoTapped(){
-        print("handle info")
+        let userProfileController = UserProfileVC(collectionViewLayout: UICollectionViewFlowLayout())
+        userProfileController.user = self.user
+        navigationController?.pushViewController(userProfileController, animated: true)
     }
     
     // create frame size for text
@@ -133,6 +138,27 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
         let size = CGSize(width: 200, height: 1000)
         let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
         return NSString(string: text).boundingRect(with: size, options: options, attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16)], context: nil)
+    }
+    
+    func configureMessage(cell: ChatCell, message: Message) {
+        guard let currentUserUid = Auth.auth().currentUser?.uid else { return }
+        
+        cell.bubbleWidthAnchor?.constant = estimateFrameForText(message.messageText).width + 32
+        cell.frame.size.height = estimateFrameForText(message.messageText).height + 20
+        
+        if message.fromId == currentUserUid {
+            cell.bubbleViewRightAnchor?.isActive = true
+            cell.bubbleViewLeftAnchor?.isActive = false
+            cell.bubbleView.backgroundColor = UIColor.rgb(red: 0, green: 137, blue: 249)
+            cell.textView.textColor = .white
+            cell.profileImageView.isHidden = true
+        } else {
+            cell.bubbleViewRightAnchor?.isActive = false
+            cell.bubbleViewLeftAnchor?.isActive = true
+            cell.bubbleView.backgroundColor = UIColor.rgb(red: 240, green: 240, blue: 240)
+            cell.textView.textColor = .black
+            cell.profileImageView.isHidden = false
+        }
     }
     
     func configureNavigationBar(){
