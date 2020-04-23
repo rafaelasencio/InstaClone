@@ -145,6 +145,33 @@
 			path = Messages;
 			sourceTree = "<group>";
 		};
+		73646E3624510E3D0055DD49 /* Social */ = {
+			isa = PBXGroup;
+			children = (
+				7364E4632443CF7100A7376A /* UserProfileHeaderCell.swift */,
+				7364E4672443FCD500A7376A /* SearchUserCell.swift */,
+				7364E4732445DB3300A7376A /* FollowLikeCell.swift */,
+				7362C699244693310022BC5A /* SelectPhotoCell.swift */,
+				7362C69B2446936F0022BC5A /* SelectPhotoHeader.swift */,
+				739B8D8124490ABA00F35C3E /* UserPostCell.swift */,
+				739B8D8324492D3400F35C3E /* FeedCell.swift */,
+				732EE034244CA0A800840A54 /* CommentCell.swift */,
+				732EE038244D152400840A54 /* NotificationCell.swift */,
+				7328FB762450541E006BB919 /* SearchPostCell.swift */,
+			);
+			path = Social;
+			sourceTree = "<group>";
+		};
+		73646E3724510E4F0055DD49 /* Messages */ = {
+			isa = PBXGroup;
+			children = (
+				73646E2A24509D1D0055DD49 /* MessageCell.swift */,
+				73646E2E2450A7580055DD49 /* NewMessageCell.swift */,
+				73646E342450FEC90055DD49 /* ChatCell.swift */,
+			);
+			path = Messages;
+			sourceTree = "<group>";
+		};
 		7364E4242442908A00A7376A = {
 			isa = PBXGroup;
 			children = (
@@ -197,19 +224,8 @@
 		7364E445244290B700A7376A /* View */ = {
 			isa = PBXGroup;
 			children = (
-				7364E4632443CF7100A7376A /* UserProfileHeaderCell.swift */,
-				7364E4672443FCD500A7376A /* SearchUserCell.swift */,
-				7364E4732445DB3300A7376A /* FollowLikeCell.swift */,
-				7362C699244693310022BC5A /* SelectPhotoCell.swift */,
-				7362C69B2446936F0022BC5A /* SelectPhotoHeader.swift */,
-				739B8D8124490ABA00F35C3E /* UserPostCell.swift */,
-				739B8D8324492D3400F35C3E /* FeedCell.swift */,
-				732EE034244CA0A800840A54 /* CommentCell.swift */,
-				732EE038244D152400840A54 /* NotificationCell.swift */,
-				7328FB762450541E006BB919 /* SearchPostCell.swift */,
-				73646E2A24509D1D0055DD49 /* MessageCell.swift */,
-				73646E2E2450A7580055DD49 /* NewMessageCell.swift */,
-				73646E342450FEC90055DD49 /* ChatCell.swift */,
+				73646E3724510E4F0055DD49 /* Messages */,
+				73646E3624510E3D0055DD49 /* Social */,
 			);
 			path = View;
 			sourceTree = "<group>";
