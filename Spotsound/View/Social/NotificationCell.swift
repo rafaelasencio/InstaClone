@@ -127,7 +127,7 @@ class NotificationCell: UITableViewCell {
         }
         
         self.addSubview(notificationLabel)
-        notificationLabel.anchor(top: nil, left: profileImageView.rightAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 8, paddingBottom: 0, paddingRight: 8, width: 0, height: 0)
+        notificationLabel.anchor(top: nil, left: profileImageView.rightAnchor, bottom: nil, right: self.rightAnchor, paddingTop: 0, paddingLeft: 8, paddingBottom: 0, paddingRight: 100, width: 0, height: 0)
         notificationLabel .centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         
     }
