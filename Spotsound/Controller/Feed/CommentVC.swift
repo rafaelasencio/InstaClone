@@ -120,7 +120,13 @@ class CommentVC: UICollectionViewController,UICollectionViewDelegateFlowLayout {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CommentCell
+        
+        handleHashtagTapped(forCell: cell)
+        
+        handleMentionTapped(forCell: cell)
+        
         cell.comment = comments[indexPath.item]
+        
         return cell
     }
     
@@ -138,10 +144,30 @@ class CommentVC: UICollectionViewController,UICollectionViewDelegateFlowLayout {
             "uid":uid] as [String:Any]
         COMMENT_REF.child(postId).childByAutoId().updateChildValues(values) { (error, ref) in
             self.uploadCommentNotificationToServer()
+            
+            if commentText.contains("@") {
+                self.uploadMentionNotification(forPostId: postId, withText: commentText, isForComment: true)
+            }
             // clean textfield after upload post
             self.commentTextField.text = nil
         }
     }
+    
+    func handleHashtagTapped(forCell cell: CommentCell){
+        cell.commentLabel.handleHashtagTap { (hashtag) in
+            let hashtagController = HashtagController(collectionViewLayout: UICollectionViewFlowLayout())
+            hashtagController.hashtag = hashtag
+            self.navigationController?.pushViewController(hashtagController, animated: true)
+        }
+    }
+    
+    func handleMentionTapped(forCell cell: CommentCell){
+        cell.commentLabel.handleMentionTap { (username) in
+            self.getMentionedUser(withUsername: username)
+        }
+    }
+    
+    //MARK: - Api
     
     func fetchComments(){
 

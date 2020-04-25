@@ -95,7 +95,7 @@ class User {
         "check": 0,
         "creationDate":creationDate,
         "uid": currentUserUid,
-        "type": FOLLOW_INT_VALIE] as [ String : Any]
+        "type": FOLLOW_INT_VALUE] as [ String : Any]
         
         NOTIFICATIONS_REF.child(self.uid).childByAutoId().updateChildValues(values)
     }
