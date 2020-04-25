@@ -23,6 +23,8 @@ class SearchVC: UITableViewController {
     var collectionView: UICollectionView!
     var collectionViewEnabled = true
     var posts = [Post]()
+    var currentKey: String?
+    var userCurrentKey: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,9 +46,15 @@ class SearchVC: UITableViewController {
         
         //fetch posts
         fetchPosts()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
-        // fetch users
-        fetchUser()
+        if posts.count > 20 {
+            if indexPath.item == posts.count - 1 {
+                fetchPosts()
+            }
+        }
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -60,6 +68,14 @@ class SearchVC: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return inSearchMode ? filteredUser.count : users.count
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if users.count > 3 {
+            if indexPath.item == users.count - 1 {
+                fetchUser()
+            }
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -98,27 +114,84 @@ class SearchVC: UITableViewController {
     //MARK: - Api
     
     func fetchUser(){
-        Database.database().reference().child("users").observe(.childAdded) { (snapshot) in
-            
-            let uid = snapshot.key
-            
-            Database.fetchUser(with: uid) { (user) in
-                self.users.append(user)
-                self.tableView.reloadData()
+        
+        if userCurrentKey == nil {
+            USER_REF.queryLimited(toLast: 4).observeSingleEvent(of: .value) { (snapshot) in
+                guard let first = snapshot.children.allObjects.first as? DataSnapshot else { return }
+                guard let allObjects = snapshot.children.allObjects as? [DataSnapshot] else { return }
+                
+                allObjects.forEach { (snapshot) in
+                    
+                    let uid = snapshot.key
+                    
+                    Database.fetchUser(with: uid) { (user) in
+                        self.users.append(user)
+                        self.tableView.reloadData()
+                    }
+                }
+                self.userCurrentKey = first.key
+            }
+        } else {
+            USER_REF.queryOrderedByKey().queryEnding(atValue: userCurrentKey).queryLimited(toLast: 5).observeSingleEvent(of: .value) { (snapshot) in
+                
+                guard let first = snapshot.children.allObjects.first as? DataSnapshot else { return }
+                guard let allObjects = snapshot.children.allObjects as? [DataSnapshot] else { return }
+                
+                allObjects.forEach { (snapshot) in
+                    let uid = snapshot.key
+                    if uid != self.userCurrentKey {
+                        
+                        Database.fetchUser(with: uid) { (user) in
+                            self.users.append(user)
+                            self.tableView.reloadData()
+                        }
+                    }
+                }
+                self.userCurrentKey = first.key
             }
         }
+        
     }
     
     func fetchPosts(){
         
-        posts.removeAll()
-        
-        POSTS_REF.observe(.childAdded) { (snapshot) in
+        if currentKey == nil {
             
-            let postId = snapshot.key
-            Database.fetchPost(with: postId) { (post) in
-                self.posts.append(post)
-                self.collectionView.reloadData()
+            // initial data pull
+            POSTS_REF.queryLimited(toLast: 21).observeSingleEvent(of: .value) { (snapshot) in
+                
+                guard let first = snapshot.children.allObjects.first as? DataSnapshot else { return }
+                guard let allObjects = snapshot.children.allObjects as? [DataSnapshot] else { return }
+                
+                allObjects.forEach { (snapshot) in
+                    let postId = snapshot.key
+                    
+                    Database.fetchPost(with: postId) { (post) in
+                        self.posts.append(post)
+                        self.collectionView.reloadData()
+                    }
+                }
+                self.currentKey = first.key
+            }
+        } else {
+            // pagination
+            POSTS_REF.queryOrderedByKey().queryEnding(atValue: self.currentKey).queryLimited(toLast: 10).observeSingleEvent(of: .value) { (snapshot) in
+                print(snapshot)
+                
+                guard let first = snapshot.children.allObjects.first as? DataSnapshot else { return }
+                guard let allObjects = snapshot.children.allObjects as? [DataSnapshot] else { return }
+                
+                allObjects.forEach { (snapshot) in
+                    let postId = snapshot.key
+                    
+                    if postId != self.currentKey {
+                        Database.fetchPost(with: postId) { (post) in
+                            self.posts.append(post)
+                            self.collectionView.reloadData()
+                        }
+                    }
+                }
+                self.currentKey = first.key
             }
         }
     }
@@ -194,11 +267,11 @@ extension SearchVC: UISearchBarDelegate, UICollectionViewDelegate, UICollectionV
         searchBar.barTintColor = UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1)
         searchBar.tintColor = .black
     }
-    
+         
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         
         searchBar.showsCancelButton = true
-        
+        fetchUser()
         collectionView.isHidden = true
         collectionViewEnabled = false
         
