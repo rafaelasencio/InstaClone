@@ -23,177 +23,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "077CCE1A-9577-45DF-AD64-F2404CF2843E"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Spotsound/Controller/UserProfile/UserProfileVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "18"
-            endingLineNumber = "18"
-            landmarkName = "UserProfileVC"
-            landmarkType = "3">
-            <Locations>
-               <Location
-                  uuid = "077CCE1A-9577-45DF-AD64-F2404CF2843E - b0e784998e64e217"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Spotsound.UserProfileVC.user.getter : Swift.Optional&lt;Spotsound.User&gt;"
-                  moduleName = "Spotsound"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/rafaasencio/Documents/xCodeProjects/Spotsound/Spotsound/Controller/UserProfile/UserProfileVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "18"
-                  endingLineNumber = "18"
-                  offsetFromSymbolStart = "122">
-               </Location>
-               <Location
-                  uuid = "077CCE1A-9577-45DF-AD64-F2404CF2843E - 410a8b0a2e32aadb"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Spotsound.UserProfileVC.user.setter : Swift.Optional&lt;Spotsound.User&gt;"
-                  moduleName = "Spotsound"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/rafaasencio/Documents/xCodeProjects/Spotsound/Spotsound/Controller/UserProfile/UserProfileVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "18"
-                  endingLineNumber = "18"
-                  offsetFromSymbolStart = "148">
-               </Location>
-               <Location
-                  uuid = "077CCE1A-9577-45DF-AD64-F2404CF2843E - 5d5476bc8c7c7fd8"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Spotsound.UserProfileVC.user.modify : Swift.Optional&lt;Spotsound.User&gt;"
-                  moduleName = "Spotsound"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/rafaasencio/Documents/xCodeProjects/Spotsound/Spotsound/Controller/UserProfile/UserProfileVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "18">
-               </Location>
-               <Location
-                  uuid = "077CCE1A-9577-45DF-AD64-F2404CF2843E - 9e38de391a7a2f6"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Spotsound.UserProfileVC.user.modify : Swift.Optional&lt;Spotsound.User&gt; with unmangled suffix &quot;.resume.0&quot;"
-                  moduleName = "Spotsound"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/rafaasencio/Documents/xCodeProjects/Spotsound/Spotsound/Controller/UserProfile/UserProfileVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "18"
-                  endingLineNumber = "18"
-                  offsetFromSymbolStart = "4">
-               </Location>
-               <Location
-                  uuid = "077CCE1A-9577-45DF-AD64-F2404CF2843E - 4ff432ee6fec9f4c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Spotsound.UserProfileVC.init(collectionViewLayout: __C.UICollectionViewLayout) -&gt; Spotsound.UserProfileVC"
-                  moduleName = "Spotsound"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/rafaasencio/Documents/xCodeProjects/Spotsound/Spotsound/Controller/UserProfile/UserProfileVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "18"
-                  endingLineNumber = "18"
-                  offsetFromSymbolStart = "63">
-               </Location>
-               <Location
-                  uuid = "077CCE1A-9577-45DF-AD64-F2404CF2843E - b44e5832363d0e48"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Spotsound.UserProfileVC.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; Spotsound.UserProfileVC"
-                  moduleName = "Spotsound"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/rafaasencio/Documents/xCodeProjects/Spotsound/Spotsound/Controller/UserProfile/UserProfileVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "18"
-                  endingLineNumber = "18"
-                  offsetFromSymbolStart = "146">
-               </Location>
-               <Location
-                  uuid = "077CCE1A-9577-45DF-AD64-F2404CF2843E - aa88891aeafde962"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Spotsound.UserProfileVC.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;Spotsound.UserProfileVC&gt;"
-                  moduleName = "Spotsound"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/rafaasencio/Documents/xCodeProjects/Spotsound/Spotsound/Controller/UserProfile/UserProfileVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "18"
-                  endingLineNumber = "18"
-                  offsetFromSymbolStart = "102">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "2260870B-14BC-43ED-8793-B090137B10E9"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Spotsound/Controller/UserProfile/UserProfileVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "22"
-            endingLineNumber = "22"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "703C6E10-7F56-4DBE-A7BD-F7DFA1F6E9A8"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Spotsound/Controller/UserProfile/UserProfileVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
-            landmarkName = "fetchCurrentUserData()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "E04E69D5-B802-4123-A14C-9029C3A20612"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Spotsound/Controller/UserProfile/UserProfileVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "129"
-            endingLineNumber = "129"
-            landmarkName = "fetchCurrentUserData()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "EB399EE7-D3C6-441B-BF0E-021A416470D2"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -201,8 +30,8 @@
             filePath = "Spotsound/Controller/UserProfile/UserProfileVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
             landmarkName = "collectionView(_:viewForSupplementaryElementOfKind:at:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -220,22 +49,6 @@
             startingLineNumber = "158"
             endingLineNumber = "158"
             landmarkName = "configureEditProfileFollowButton()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "B5ABE815-F07F-4363-9F58-D137EE634415"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Spotsound/Controller/UserProfile/UserProfileVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "27"
-            endingLineNumber = "27"
-            landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
