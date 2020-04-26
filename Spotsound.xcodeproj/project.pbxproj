@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4FBD3138404015FFE586BAB0 /* Pods_Spotsound.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99BC0CE9D89A5761B6DF0653 /* Pods_Spotsound.framework */; };
+		4FBD3138404015FFE586BAB0 /* Pods_Spotsound.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99BC0CE9D89A5761B6DF0653 /* Pods_Spotsound.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		7328FB772450541E006BB919 /* SearchPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7328FB762450541E006BB919 /* SearchPostCell.swift */; };
 		732EE033244C9FCD00840A54 /* CommentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732EE032244C9FCD00840A54 /* CommentVC.swift */; };
 		732EE035244CA0A800840A54 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732EE034244CA0A800840A54 /* CommentCell.swift */; };
@@ -103,6 +103,7 @@
 		7364E46F2444DB4D00A7376A /* CustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
 		7364E4712445DA8F00A7376A /* FollowLikeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowLikeVC.swift; sourceTree = "<group>"; };
 		7364E4732445DB3300A7376A /* FollowLikeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowLikeCell.swift; sourceTree = "<group>"; };
+		73741D5224550EB0001C60B4 /* ActiveLabel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ActiveLabel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		739B8D7F2448AC6000F35C3E /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		739B8D8124490ABA00F35C3E /* UserPostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPostCell.swift; sourceTree = "<group>"; };
 		739B8D8324492D3400F35C3E /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
@@ -134,6 +135,7 @@
 		6694CBF50DAD6BCEE5BE7174 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				73741D5224550EB0001C60B4 /* ActiveLabel.framework */,
 				99BC0CE9D89A5761B6DF0653 /* Pods_Spotsound.framework */,
 			);
 			name = Frameworks;
@@ -628,7 +630,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7EJKV8CGJ8;
 				INFOPLIST_FILE = Spotsound/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -648,7 +650,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7EJKV8CGJ8;
 				INFOPLIST_FILE = Spotsound/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

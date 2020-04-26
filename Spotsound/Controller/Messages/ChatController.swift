@@ -24,7 +24,7 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         let containerView = UIView()
         containerView.frame = CGRect(x: 0, y: 0, width: 100, height: 55)
-    
+        containerView.backgroundColor = .white
         
         containerView.addSubview(sendButton)
         sendButton.anchor(top: nil, left: nil, bottom: nil, right: containerView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 8, width: 50, height: 0)
@@ -64,6 +64,11 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
         //register cell
         self.collectionView.register(ChatCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView.backgroundColor = .white
+        // dismiss keyboard scrolling
+        self.collectionView.alwaysBounceVertical = true
+        self.collectionView.keyboardDismissMode = .interactive
+        self.collectionView.contentInset = UIEdgeInsets(top:  0, left: 0, bottom: -50, right: 0)
+        self.collectionView.scrollIndicatorInsets = UIEdgeInsets(top:  0, left: 0, bottom: -50, right: 0)
         
         // configure navigation bar
         configureNavigationBar()

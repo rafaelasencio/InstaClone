@@ -9,5 +9,5 @@ target 'Spotsound' do
 pod 'Firebase/Auth'
 pod 'Firebase/Database'
 pod 'Firebase/Storage'
-pod 'ActiveLabel' 
+pod 'ActiveLabel'
 end
