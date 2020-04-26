@@ -21,6 +21,7 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
     var viewSinglePost = false
     var post: Post?
     var currentKey: String?
+    var userProfileController: UserProfileVC?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -117,8 +118,32 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
     }
     
     func handleOptionsTapped(for cell: FeedCell) {
-        print("options")
-    }
+        
+        guard let post = cell.post else { return }
+        
+        if post.ownerId == Auth.auth().currentUser?.uid {
+            let alertController = UIAlertController(title: "Options", message: nil, preferredStyle: .actionSheet)
+                
+                alertController.addAction(UIAlertAction(title: "Delete post", style: .destructive, handler: { (_) in
+                    
+                    post.deletePost()
+                    if !self.viewSinglePost {
+                        self.handleRefresh()
+                    } else {
+                        if let userProfileController = self.userProfileController {
+                            _ = self.navigationController?.popViewController(animated: true)
+                            userProfileController.handleRefresh()
+                        }
+                    }
+                }))
+                
+                alertController.addAction(UIAlertAction(title: "Edit post", style: .default, handler: { (_) in
+                    print("edit post")
+                }))
+                alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                self.present(alertController, animated: true, completion: nil)
+            }
+        }
     
     func handleLikeTapped(for cell: FeedCell, isDoubleTap: Bool) {
         

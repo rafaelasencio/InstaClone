@@ -26,6 +26,9 @@ class SearchVC: UITableViewController {
     var currentKey: String?
     var userCurrentKey: String?
     
+    
+    //MARK: - Init
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,6 +46,9 @@ class SearchVC: UITableViewController {
         
         // configure collection view
         configureCollectionView()
+        
+        // configure refresh control
+        configureRefreshControl()
         
         //fetch posts
         fetchPosts()
@@ -110,6 +116,21 @@ class SearchVC: UITableViewController {
         navigationController?.pushViewController(userProfileVC, animated: true)
     }
     
+    //MARK: - Handlers
+    
+    @objc func handleRefresh(){
+        posts.removeAll(keepingCapacity: false)
+        self.currentKey = nil
+        fetchPosts()
+        collectionView.reloadData()
+    }
+    
+    func configureRefreshControl(){
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
+        tableView.refreshControl = refreshControl
+    }
+    
     
     //MARK: - Api
     
@@ -159,6 +180,8 @@ class SearchVC: UITableViewController {
             
             // initial data pull
             POSTS_REF.queryLimited(toLast: 21).observeSingleEvent(of: .value) { (snapshot) in
+                
+                self.tableView.refreshControl?.endRefreshing()
                 
                 guard let first = snapshot.children.allObjects.first as? DataSnapshot else { return }
                 guard let allObjects = snapshot.children.allObjects as? [DataSnapshot] else { return }

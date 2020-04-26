@@ -19,10 +19,15 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
     var posts = [Post]()
     var currentKey: String?
     
+    
+    //MARK: - Init
     override func viewDidLoad() {
         self.collectionView.backgroundColor = .white
         self.collectionView!.register(UserPostCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView!.register(UserProfileHeaderCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: userProfileHeaderCell)
+        
+        // configure refresh control
+        configureRefreshControl()
         
         //fetch is user is not current user.
         if self.user == nil {
@@ -101,6 +106,7 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let feedVC = FeedVC(collectionViewLayout: UICollectionViewFlowLayout())
         feedVC.viewSinglePost = true
+        feedVC.userProfileController = self
         feedVC.post = posts[indexPath.row]
 
         navigationController?.pushViewController(feedVC, animated: true)
@@ -183,6 +189,19 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
 extension UserProfileVC: UserProfileHeaderCellDelegate {
     
     //MARK: - Handlers
+    
+    @objc func handleRefresh(){
+        posts.removeAll(keepingCapacity: false)
+        self.currentKey = nil
+        fetchPost()
+        collectionView.reloadData()
+    }
+    
+    func configureRefreshControl(){
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
+        collectionView.refreshControl = refreshControl
+    }
     
     func handleFollowersButtonTapped(for header: UserProfileHeaderCell) {
         let followVC = FollowLikeVC()

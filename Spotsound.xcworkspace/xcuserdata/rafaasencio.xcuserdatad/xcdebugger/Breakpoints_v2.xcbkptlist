@@ -30,8 +30,8 @@
             filePath = "Spotsound/Controller/UserProfile/UserProfileVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
             landmarkName = "collectionView(_:viewForSupplementaryElementOfKind:at:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -174,8 +174,8 @@
             filePath = "Spotsound/Controller/Feed/FeedVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "184"
-            endingLineNumber = "184"
+            startingLineNumber = "209"
+            endingLineNumber = "209"
             landmarkName = "handleHastagTapped(forCell:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -190,8 +190,8 @@
             filePath = "Spotsound/Controller/Feed/FeedVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "185"
-            endingLineNumber = "185"
+            startingLineNumber = "210"
+            endingLineNumber = "210"
             landmarkName = "handleHastagTapped(forCell:)"
             landmarkType = "7">
             <Locations>
@@ -258,6 +258,182 @@
             endingLineNumber = "175"
             landmarkName = "uploadHastagToServer(forPostId:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FE480E5F-C174-4DC2-ACAA-F2C911E7A18B"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Spotsound/Controller/Feed/FeedVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "342F1433-1ECA-41D4-8DD0-646153EF2E7E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Spotsound/Controller/Feed/FeedVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "274"
+            endingLineNumber = "274"
+            landmarkName = "updateUserFeeds()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "81EE00F5-CA1A-4480-9662-8616756544E1"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Spotsound/Controller/Feed/FeedVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
+            landmarkName = "handleOptionsTapped(for:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "81EE00F5-CA1A-4480-9662-8616756544E1 - 4746fa5334ff0a33"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Spotsound.FeedVC.handleOptionsTapped(for: Spotsound.FeedCell) -&gt; ()"
+                  moduleName = "Spotsound"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rafaasencio/Documents/xCodeProjects/Spotsound/Spotsound/Controller/Feed/FeedVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "126"
+                  endingLineNumber = "126"
+                  offsetFromSymbolStart = "669">
+               </Location>
+               <Location
+                  uuid = "81EE00F5-CA1A-4480-9662-8616756544E1 - 3720fb31e3d01bb7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.UIAlertAction) -&gt; () in Spotsound.FeedVC.handleOptionsTapped(for: Spotsound.FeedCell) -&gt; ()"
+                  moduleName = "Spotsound"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rafaasencio/Documents/xCodeProjects/Spotsound/Spotsound/Controller/Feed/FeedVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "128"
+                  endingLineNumber = "128"
+                  offsetFromSymbolStart = "84">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F4C49E95-E491-4980-8EA1-04F642974D35"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Spotsound/Controller/Search/SearchVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "181"
+            endingLineNumber = "181"
+            landmarkName = "fetchPosts()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "F4C49E95-E491-4980-8EA1-04F642974D35 - 9711a32083815419"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Spotsound.SearchVC.fetchPosts() -&gt; ()"
+                  moduleName = "Spotsound"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rafaasencio/Documents/xCodeProjects/Spotsound/Spotsound/Controller/Search/SearchVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "182"
+                  endingLineNumber = "182"
+                  offsetFromSymbolStart = "216">
+               </Location>
+               <Location
+                  uuid = "F4C49E95-E491-4980-8EA1-04F642974D35 - d9332f9a736c733e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.FIRDataSnapshot) -&gt; () in Spotsound.SearchVC.fetchPosts() -&gt; ()"
+                  moduleName = "Spotsound"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rafaasencio/Documents/xCodeProjects/Spotsound/Spotsound/Controller/Search/SearchVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "184"
+                  endingLineNumber = "184"
+                  offsetFromSymbolStart = "59">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "58409180-D1DE-4445-9CFA-820C9EF35617"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Spotsound/Controller/Search/SearchVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "200"
+            endingLineNumber = "200"
+            landmarkName = "fetchPosts()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "58409180-D1DE-4445-9CFA-820C9EF35617 - 9711a32083815419"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Spotsound.SearchVC.fetchPosts() -&gt; ()"
+                  moduleName = "Spotsound"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rafaasencio/Documents/xCodeProjects/Spotsound/Spotsound/Controller/Search/SearchVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "201"
+                  endingLineNumber = "201"
+                  offsetFromSymbolStart = "534">
+               </Location>
+               <Location
+                  uuid = "58409180-D1DE-4445-9CFA-820C9EF35617 - 5bf543c09d19363f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (__C.FIRDataSnapshot) -&gt; () in Spotsound.SearchVC.fetchPosts() -&gt; ()"
+                  moduleName = "Spotsound"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rafaasencio/Documents/xCodeProjects/Spotsound/Spotsound/Controller/Search/SearchVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "202"
+                  endingLineNumber = "202"
+                  offsetFromSymbolStart = "74">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

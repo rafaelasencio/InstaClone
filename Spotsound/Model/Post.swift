@@ -129,6 +129,59 @@ class Post {
             }
         }
     }
+    
+    func deletePost(){
+        print("delete post")
+        guard let currentUserUid = Auth.auth().currentUser?.uid else { return }
+        
+        // delete photo from storage
+        Storage.storage().reference(forURL: self.imageUrl).delete(completion: nil)
+        
+        // remove post from user followers feed
+        USER_FOLLOWER_REF.child(currentUserUid).observe(.childAdded) { (snapshot) in
+            let followerUid = snapshot.key
+            USER_FEED_REF.child(followerUid).child(self.postId).removeValue()
+        }
+        
+        // remove post from current user feed
+        USER_FEED_REF.child(currentUserUid).child(self.postId).removeValue()
+        
+        // remove from user post
+        USER_POST_REF.child(currentUserUid).child(self.postId).removeValue()
+        
+        // remove from post likes
+        POST_LIKES_REF.child(self.postId).observe(.childAdded) { (snapshot) in
+            let uid = snapshot.key
+            print("uid: ", uid)
+            USER_LIKES_REF.child(uid).child(self.postId).observeSingleEvent(of: .value) { (snapshot) in
+                guard let notificationId = snapshot.value as? String else { return }
+                print("notificationId: ", notificationId)
+                // remove from notifications
+                NOTIFICATIONS_REF.child(self.ownerId).child(notificationId).removeValue { (err, ref) in
+                    //first from post-likes, after from user-likes to still having notificationUid value
+                    POST_LIKES_REF.child(self.postId).removeValue()
+                    USER_LIKES_REF.child(uid).child(self.postId).removeValue()
+                }
+            }
+        }
+        
+        let words = caption.components(separatedBy: .whitespacesAndNewlines)
+        // loops array with words in caption
+        for var word in words {
+            if word.hasPrefix("#") {
+                word = word.trimmingCharacters(in: .punctuationCharacters)
+                word = word.trimmingCharacters(in: .symbols)
+                // delete from hashtag struct with word value
+                HASHTAG_POST_REF.child(word).child(postId).removeValue()
+            }
+        }
+        
+        COMMENT_REF.child(postId).removeValue()
+        POSTS_REF.child(postId).removeValue()
+        
+    }
+    
+    
 }
 
 
