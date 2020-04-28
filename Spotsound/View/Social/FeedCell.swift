@@ -197,7 +197,7 @@ class FeedCell: UICollectionViewCell {
             captionLabel.numberOfLines = 2
         }
         
-        postTimeLabel.text = " 2 Days Ago"
+        postTimeLabel.text = post.creationDate.timeAgoToDisplay()
     }
     
     required init?(coder: NSCoder) {

@@ -125,7 +125,7 @@ class EditProfileController: UIViewController {
     func loadUserData() {
         guard let user = self.user else { return }
         
-//        profileImageView.loadImage(with: user.profileImageUrl)
+        profileImageView.loadImage(with: user.profileImageUrl)
         fullnameTextField.text = user.name
         usernameTextField.text = user.username
     }
@@ -136,7 +136,7 @@ class EditProfileController: UIViewController {
         
         let frame = CGRect(x: 0, y: 88, width: view.frame.width, height: 150)
         let containerView = UIView(frame: frame)
-        containerView.backgroundColor = UIColor.groupTableViewBackground
+        containerView.backgroundColor = UIColor.systemGroupedBackground
         view.addSubview(containerView)
         
         containerView.addSubview(profileImageView)
@@ -206,19 +206,27 @@ class EditProfileController: UIViewController {
             Storage.storage().reference(forURL: user.profileImageUrl).delete(completion: nil)
             
             let filename = NSUUID().uuidString
+            let storageRef = STORAGE_POST_IMAGES_REF.child(filename)
             
             guard let updatedProfileImage = profileImageView.image else { return }
             
             guard let imageData = updatedProfileImage.jpegData(compressionQuality: 0.3) else { return }
             
-            STORAGE_PROFILE_IMAGES_REF.child(filename).putData(imageData, metadata: nil) { (metadata, error) in
+            storageRef.putData(imageData, metadata: nil) { (metadata, error) in
                 
                 if let error = error {
                     print("Failed to upload image to storage with error: ", error.localizedDescription)
+                    return
                 }
                 
-                STORAGE_PROFILE_IMAGES_REF.downloadURL(completion: { (url, error) in
-                    USER_REF.child(currentUid).child("profileImageUrl").setValue(url?.absoluteString, withCompletionBlock: { (err, ref) in
+                STORAGE_PROFILE_IMAGES_REF.child(filename).downloadURL(completion: { (url, error) in
+                    
+                    guard let updateProfileImageUrl = url?.absoluteString else {
+                        print("Profile image url is nil: ",error?.localizedDescription)
+                        return
+                    }
+                    
+                    USER_REF.child(currentUid).child("profileImageUrl").setValue(updateProfileImageUrl, withCompletionBlock: { (err, ref) in
                         
                         guard let userProfileController = self.userProfileController else { return }
                         userProfileController.fetchCurrentUserData()

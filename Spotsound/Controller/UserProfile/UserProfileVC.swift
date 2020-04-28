@@ -222,6 +222,12 @@ extension UserProfileVC: UserProfileHeaderCellDelegate {
         
         if header.editProfileFollowButton.titleLabel?.text == "Edit Profile" {
             print("go to EditProfileVC")
+            let editProfileController = EditProfileController()
+            editProfileController.user = user
+            editProfileController.userProfileController = self
+            let navigationController = UINavigationController(rootViewController: editProfileController)
+            navigationController.modalPresentationStyle = .fullScreen
+            self.present(navigationController, animated: true, completion: nil)
             
         } else {
             if header.editProfileFollowButton.titleLabel?.text == "Follow" {
