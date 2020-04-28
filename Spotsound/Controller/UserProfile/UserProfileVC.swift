@@ -245,6 +245,8 @@ extension UserProfileVC: UserProfileHeaderCellDelegate {
     func handleSetUserStats(for header: UserProfileHeaderCell) {
         var numberOfFollowers: Int!
         var numberOfFollowings: Int!
+        var numberOfPosts: Int!
+        
         guard let uid = header.user?.uid else {return}
         
         //observe instead observeSingleEvent to update data in realtime
@@ -269,6 +271,17 @@ extension UserProfileVC: UserProfileHeaderCellDelegate {
             let attributedText = NSMutableAttributedString(string: "\(numberOfFollowings!)\n", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14)])
             attributedText.append(NSAttributedString(string: "following", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.lightGray]))
             header.followingLabel.attributedText = attributedText
+        }
+        
+        USER_POST_REF.child(uid).observe(.value) { (snapshot) in
+            if let snapshot = snapshot.value as? Dictionary<String, AnyObject> {
+                numberOfPosts = snapshot.count
+            } else {
+                numberOfPosts = 0
+            }
+            let attributedText = NSMutableAttributedString(string: "\(numberOfPosts!)\n", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14)])
+            attributedText.append(NSAttributedString(string: "posts", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.lightGray]))
+            header.postLabel.attributedText = attributedText
         }
     }
     
